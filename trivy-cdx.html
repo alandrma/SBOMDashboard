@@ -1,0 +1,608 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SBOM Dashboard — CycloneDX</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #eceef2;
+  --surf:  #f4f5f7;
+  --surf2: #e8eaef;
+  --surf3: #e0e3ea;
+  --bd:    #d0d4de;
+  --bd2:   #b8bdd0;
+  --tx:    #1e2133;
+  --tx2:   #52596e;
+  --tx3:   #8b92a8;
+  --ac:    #3b5bdb;
+  --ac-s:  #e0e7ff;
+
+  --cc:#b91c1c; --cb:#fde8e8; --cbr:#f0a0a0;
+  --hc:#b45309; --hb:#fef3e2; --hbr:#f0c070;
+  --mc:#7c6d00; --mb:#faf6d0; --mbr:#d4c050;
+  --lc:#166534; --lb:#e8f5ee; --lbr:#7ec9a0;
+  --nc:#52596e; --nb:#edeef2; --nbr:#b8bdd0;
+
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --r:6px; --rl:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* Topbar */
+.topbar{background:#e2e5ed;border-bottom:1px solid var(--bd);box-shadow:0 1px 3px rgba(0,0,0,.07);padding:0 24px;height:52px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:200}
+.logo{font-weight:700;font-size:15px;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo-mark{display:grid;grid-template-columns:1fr 1fr;gap:2px;width:18px;height:18px}
+.logo-mark span{display:block;border-radius:2px}
+.logo-mark span:nth-child(1){background:var(--ac);opacity:.9}
+.logo-mark span:nth-child(2){background:var(--ac);opacity:.5}
+.logo-mark span:nth-child(3){background:var(--ac);opacity:.5}
+.logo-mark span:nth-child(4){background:var(--cc);opacity:.9}
+.logo em{color:var(--ac);font-style:normal}
+.sep{flex:1;min-width:4px}
+.schema-badge{font-size:10px;padding:3px 9px;border-radius:20px;background:var(--ac-s);border:1px solid #b8c8f5;color:var(--ac);letter-spacing:.4px;white-space:nowrap;flex-shrink:0;font-weight:500}
+#tb-art{font-size:12px;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px}
+.btn{background:var(--ac);color:#fff;border:none;padding:6px 14px;border-radius:var(--r);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s;flex-shrink:0}
+.btn:hover{opacity:.85}
+#fi{display:none}
+
+/* Dropzone */
+#dz{margin:56px auto;max-width:520px;border:2px dashed var(--bd2);border-radius:var(--rl);padding:60px 32px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--surf)}
+#dz:hover,#dz.over{border-color:var(--ac);background:var(--ac-s)}
+#dz svg{opacity:.35;margin:0 auto 16px;display:block}
+#dz h2{font-weight:600;font-size:17px;margin-bottom:6px}
+#dz p{color:var(--tx2);font-size:13px}
+#dz small{display:block;margin-top:10px;color:var(--tx3);font-size:11px}
+#dz code{background:var(--surf3);border:1px solid var(--bd);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;color:var(--tx2)}
+
+/* Main */
+#main{display:none;padding:20px 24px 64px}
+.slabel{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+/* Meta grid */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.mc{background:var(--surf);padding:11px 14px}
+.mk{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);margin-bottom:3px}
+.mv{font-size:13px;color:var(--tx);font-weight:500;word-break:break-all}
+.mv.mono{font-family:var(--mono);font-weight:400;font-size:11px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:20px}
+.stat{background:var(--surf);border:1px solid var(--bd);border-radius:var(--rl);padding:12px 14px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc::before{background:var(--cc)} .sh::before{background:var(--hc)}
+.sm::before{background:var(--mc)} .sl::before{background:var(--lc)}
+.sn::before{background:var(--bd2)} .st::before{background:var(--ac)}
+.stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);margin-bottom:4px}
+.stat-num{font-size:26px;font-weight:700;line-height:1}
+.sc .stat-num{color:var(--cc)} .sh .stat-num{color:var(--hc)}
+.sm .stat-num{color:var(--mc)} .sl .stat-num{color:var(--lc)}
+.st .stat-num{color:var(--ac)}
+
+/* Tabs */
+.tab-bar{display:flex;border-bottom:1px solid var(--bd);margin-bottom:16px;overflow-x:auto}
+.tab{padding:9px 16px;font-size:12px;font-weight:500;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .15s;user-select:none;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--tx)}
+.tab.on{color:var(--ac);border-bottom-color:var(--ac)}
+.tbadge{font-size:10px;padding:1px 6px;border-radius:10px;background:var(--surf2);color:var(--tx3)}
+.tab.on .tbadge{background:var(--ac-s);color:var(--ac)}
+.tpanel{display:none}
+.tpanel.on{display:block}
+.type-pill{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:var(--surf3);border:1px solid var(--bd2);color:var(--tx2)}
+
+/* Card / Table */
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.toolbar{padding:10px 12px;border-bottom:1px solid var(--bd);display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surf2)}
+.search{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:6px 11px;color:var(--tx);font-family:var(--sans);font-size:13px;width:230px;outline:none}
+.search:focus{border-color:var(--ac);box-shadow:0 0 0 2px var(--ac-s)}
+.search::placeholder{color:var(--tx3)}
+.fbtn{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:5px 9px;font-family:var(--sans);font-size:11px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all .15s;user-select:none}
+.fbtn:hover{border-color:var(--bd2);color:var(--tx)}
+.fbtn.fc{background:var(--cb);border-color:var(--cbr);color:var(--cc)}
+.fbtn.fh{background:var(--hb);border-color:var(--hbr);color:var(--hc)}
+.fbtn.fm{background:var(--mb);border-color:var(--mbr);color:var(--mc)}
+.fbtn.fl{background:var(--lb);border-color:var(--lbr);color:var(--lc)}
+.fbtn.fn{background:var(--nb);border-color:var(--nbr);color:var(--nc)}
+select.fbtn{appearance:auto;padding:5px 8px}
+.tcount{margin-left:auto;font-size:11px;color:var(--tx3);white-space:nowrap}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--surf2);padding:8px 12px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--tx3);border-bottom:1px solid var(--bd);white-space:nowrap;user-select:none}
+thead th[data-key]{cursor:pointer}
+thead th[data-key]:hover{color:var(--tx2)}
+th.sa::after{content:' ↑';color:var(--ac)}
+th.sd::after{content:' ↓';color:var(--ac)}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .1s;cursor:pointer}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--surf2)}
+td{padding:9px 12px;vertical-align:middle;color:var(--tx)}
+
+/* Expand */
+.xrow{display:none;cursor:default}
+.xrow.on{display:table-row}
+.xrow:hover{background:transparent!important}
+.xcell{padding:0!important}
+.xbody{padding:14px 16px;background:var(--surf2);border-top:1px solid var(--bd)}
+.xgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.xf label{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);display:block;margin-bottom:3px}
+.xf .val{font-size:13px;color:var(--tx);word-break:break-all}
+.xf .val.mono{font-family:var(--mono);font-size:11px;color:var(--tx2)}
+.full{grid-column:1/-1}
+.xbtn{background:none;border:none;color:var(--tx3);cursor:pointer;font-size:13px;padding:0;transition:color .15s;line-height:1}
+.xbtn:hover{color:var(--ac)}
+
+/* Severity */
+.sev{display:inline-block;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;border:1px solid}
+.sev-Critical,.sev-critical{background:var(--cb);color:var(--cc);border-color:var(--cbr)}
+.sev-High,.sev-high{background:var(--hb);color:var(--hc);border-color:var(--hbr)}
+.sev-Medium,.sev-medium{background:var(--mb);color:var(--mc);border-color:var(--mbr)}
+.sev-Low,.sev-low{background:var(--lb);color:var(--lc);border-color:var(--lbr)}
+.sev-Unknown,.sev-unknown,.sev-None,.sev-none{background:var(--nb);color:var(--nc);border-color:var(--nbr)}
+
+/* Score bar */
+.sb-wrap{display:flex;align-items:center;gap:6px}
+.sb-val{font-weight:600;font-size:13px;min-width:30px}
+.sb-track{flex:1;height:4px;background:var(--surf3);border-radius:2px;overflow:hidden;min-width:44px}
+.sb-fill{height:100%;border-radius:2px}
+
+/* Misc */
+.cwe{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:var(--ac-s);border:1px solid #b8c8f5;color:var(--ac);margin:1px 2px 1px 0;font-family:var(--mono)}
+.lic{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:var(--surf3);border:1px solid var(--bd2);color:var(--ac);margin:1px 2px 1px 0}
+.hash-item{font-size:10px;color:var(--tx3);display:block}
+.hash-item b{color:var(--tx2);margin-right:4px}
+.vendor-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.vscore{font-size:11px;padding:2px 7px;border-radius:4px;background:var(--surf3);border:1px solid var(--bd);color:var(--tx2)}
+.refs a{display:block;font-size:11px;color:var(--ac);text-decoration:none;word-break:break-all;margin-bottom:2px}
+.refs a:hover{text-decoration:underline}
+.cvss-block{display:flex;flex-direction:column;gap:4px;margin-top:3px}
+.cvss-row{display:flex;align-items:baseline;gap:8px;font-size:12px}
+.cvss-src{font-weight:600;color:var(--tx2);min-width:38px}
+.cvss-vec{font-family:var(--mono);font-size:10px;color:var(--tx3);word-break:break-all}
+.purl-cell{font-family:var(--mono);font-size:11px;color:var(--tx2);max-width:260px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.affected-chip{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:#fff0f0;border:1px solid #f5b8b8;color:#b91c1c;margin:1px 2px 1px 0}
+.empty{padding:40px;text-align:center;color:var(--tx3);font-size:13px}
+.dep-row{padding:9px 14px;border-bottom:1px solid var(--bd);display:flex;align-items:flex-start;gap:12px;font-size:12px}
+.dep-row:last-child{border-bottom:none}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:3px}
+@media(max-width:700px){#main{padding:12px}.search{width:150px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-mark"><span></span><span></span><span></span><span></span></div>
+    SBOM<em>view</em>
+  </div>
+  <span class="schema-badge" id="schema-badge">CycloneDX</span>
+  <div class="sep"></div>
+  <span id="tb-art"></span>
+  <button class="btn" onclick="document.getElementById('fi').click()">Load JSON</button>
+  <input type="file" id="fi" accept=".json">
+</div>
+
+<div id="dz">
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+    <rect x="3" y="3" width="38" height="38" rx="5" stroke="#3b5bdb" stroke-width="1.8" stroke-dasharray="5 3"/>
+    <path d="M22 13v18M13 23l9-9 9 9" stroke="#3b5bdb" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <h2>Drop CycloneDX SBOM here</h2>
+  <p>Format: <code>bomFormat: "CycloneDX"</code> · specVersion 1.5 / 1.6</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--tx3)">Generate with: <code>trivy image --format cyclonedx -o sbom.json &lt;image&gt;</code></p>
+  <small>All processing is done locally — no data is transmitted</small>
+</div>
+
+<div id="main">
+  <div class="slabel">bom metadata</div>
+  <div class="meta-grid" id="meta-grid"></div>
+  <div class="slabel">vulnerability summary</div>
+  <div class="stats" id="stats"></div>
+  <div class="slabel">results</div>
+  <div class="tab-bar" id="tab-bar"></div>
+  <div id="panels"></div>
+</div>
+
+<script>
+let SS = {}, SF = {};
+
+// ── File load ─────────────────────────────────────────────────
+const dz = document.getElementById('dz');
+const fi = document.getElementById('fi');
+dz.addEventListener('click', () => fi.click());
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); if (e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); });
+fi.addEventListener('change', e => { if (e.target.files[0]) load(e.target.files[0]); e.target.value = ''; });
+
+function load(file) {
+  const r = new FileReader();
+  r.onload = e => {
+    try {
+      const d = JSON.parse(e.target.result);
+      if (d.bomFormat !== 'CycloneDX' && !d.$schema?.includes('cyclonedx') && !Array.isArray(d.components)) {
+        alert('This does not look like a CycloneDX SBOM (missing bomFormat).\n\nFor Trivy native JSON, use trivy-json.html instead.');
+        return;
+      }
+      init(d);
+    } catch (err) { alert('Invalid JSON:\n' + err.message); }
+  };
+  r.readAsText(file);
+}
+
+// ── Init ──────────────────────────────────────────────────────
+function init(d) {
+  dz.style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+
+  const m    = d.metadata || {};
+  const comp = m.component || {};
+  const tool = m.tools?.components?.[0] || m.tools?.[0] || {};
+  const allV = d.vulnerabilities || [];
+  const comps = d.components || [];
+
+  document.getElementById('schema-badge').textContent = 'CycloneDX ' + (d.specVersion || '—');
+  document.getElementById('tb-art').textContent = comp.name || d.serialNumber || '';
+
+  setMeta([
+    ['Target',       comp.name    || '—'],
+    ['Version',      comp.version || '—'],
+    ['Type',         comp.type    || '—'],
+    ['Scanned at',   m.timestamp  ? fmtDT(m.timestamp) : '—'],
+    ['Scanner',      (tool.name   || '—') + (tool.version ? ' ' + tool.version : '')],
+    ['Spec version', d.specVersion || '—'],
+    ['Serial',       (d.serialNumber || '—').replace('urn:uuid:', '')],
+    ['Components',   comps.length],
+  ]);
+
+  setStats(allV.map(v => topSev(v)));
+
+  // Build tabs
+  const bar = document.getElementById('tab-bar');
+  const panelsEl = document.getElementById('panels');
+  bar.innerHTML = ''; panelsEl.innerHTML = '';
+
+  [
+    { id: 'cdx-comp', label: 'Components',      badge: comps.length           },
+    { id: 'cdx-vuln', label: 'Vulnerabilities', badge: allV.length            },
+    { id: 'cdx-dep',  label: 'Dependencies',    badge: (d.dependencies || []).length },
+  ].forEach((t, i) => {
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (i === 0 ? ' on' : '');
+    tab.dataset.pid = t.id;
+    tab.innerHTML = `${t.label} <span class="tbadge">${t.badge}</span>`;
+    tab.addEventListener('click', () => switchTab(t.id));
+    bar.appendChild(tab);
+
+    const panel = document.createElement('div');
+    panel.id = t.id;
+    panel.className = 'tpanel' + (i === 0 ? ' on' : '');
+    panelsEl.appendChild(panel);
+  });
+
+  renderComponents(comps);
+  renderVulns(allV);
+  renderDeps(d.dependencies || []);
+}
+
+// ── Components ────────────────────────────────────────────────
+function renderComponents(comps) {
+  const pid = 'cdx-comp';
+  SS[pid] = { key: 'name', dir: 1 };
+  const types = [...new Set(comps.map(c => c.type).filter(Boolean))].sort();
+  const panel = document.getElementById(pid);
+
+  panel.innerHTML = `<div class="card">
+  <div class="toolbar">
+    <input class="search" id="s-${pid}" placeholder="Search name, purl, version…">
+    <select class="fbtn" id="tf-${pid}">
+      <option value="">All types</option>
+      ${types.map(t => `<option value="${esc(t)}">${esc(t)}</option>`).join('')}
+    </select>
+    <span class="tcount" id="cnt-${pid}"></span>
+  </div>
+  <div style="overflow-x:auto">
+    <table id="tbl-${pid}">
+      <thead><tr>
+        <th style="width:22px"></th>
+        <th data-key="name">Name</th>
+        <th data-key="version">Version</th>
+        <th data-key="type">Type</th>
+        <th>PURL</th>
+        <th>Licenses</th>
+        <th>Hashes</th>
+      </tr></thead>
+      <tbody id="tbody-${pid}"></tbody>
+    </table>
+  </div></div>`;
+
+  const render = () => {
+    const q  = (document.getElementById('s-'  + pid)?.value || '').toLowerCase();
+    const tf = (document.getElementById('tf-' + pid)?.value || '');
+    let rows = comps.filter(c =>
+      (!q  || [c.name, c.version, c.purl, c.type].join(' ').toLowerCase().includes(q)) &&
+      (!tf || c.type === tf)
+    );
+    const { key, dir } = SS[pid];
+    rows.sort((a, b) => (String(a[key] || '').toLowerCase() < String(b[key] || '').toLowerCase() ? -1 : 1) * dir);
+    document.getElementById('cnt-' + pid).textContent = `${rows.length} / ${comps.length}`;
+    const tbody = document.getElementById('tbody-' + pid);
+    if (!rows.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty">No components match.</div></td></tr>`; updateSortTH(pid); return; }
+    tbody.innerHTML = rows.map((c, i) => {
+      const rid    = pid + 'r' + i;
+      const lics   = cdxLicenses(c);
+      const hashes = (c.hashes || []).slice(0, 2);
+      return `<tr onclick="toggleX('${rid}',event)">
+        <td><button class="xbtn" id="xb-${rid}">▸</button></td>
+        <td style="font-weight:500">${esc(c.name || '—')}</td>
+        <td style="font-family:var(--mono);font-size:12px;color:var(--tx2)">${esc(c.version || '—')}</td>
+        <td><span class="type-pill">${esc(c.type || '—')}</span></td>
+        <td class="purl-cell" title="${esc(c.purl || '')}">${esc(c.purl || '—')}</td>
+        <td>${lics.map(l => `<span class="lic">${esc(l)}</span>`).join('') || '<span style="color:var(--tx3)">—</span>'}</td>
+        <td>${hashes.map(h => `<span class="hash-item"><b>${h.alg}</b>${h.content.slice(0, 14)}…</span>`).join('')}</td>
+      </tr>
+      <tr class="xrow" id="x-${rid}"><td class="xcell" colspan="7"><div class="xbody">${compDetail(c)}</div></td></tr>`;
+    }).join('');
+    updateSortTH(pid);
+  };
+
+  document.getElementById('s-'  + pid).addEventListener('input', render);
+  document.getElementById('tf-' + pid).addEventListener('change', render);
+  wireSortHeaders(pid, render);
+  render();
+}
+
+function compDetail(c) {
+  const hashes = c.hashes || [];
+  return xgrid([
+    xf('BOM-ref', c['bom-ref'] || '—', true),
+    c.purl ? xf('PURL', c.purl, true, true) : null,
+    c.cpe  ? xf('CPE',  c.cpe,  true, true) : null,
+    c.description ? xf('Description', c.description, false, true) : null,
+    hashes.length ? xfRaw('Hashes', hashes.map(h => `<span class="hash-item"><b>${h.alg}</b>${h.content}</span>`).join(''), true) : null,
+    c.supplier?.name ? xf('Supplier', c.supplier.name) : null,
+    c.author ? xf('Author', c.author) : null,
+  ]);
+}
+
+function cdxLicenses(c) {
+  const out = [];
+  (c.licenses || []).forEach(l => {
+    if (l.license?.id) out.push(l.license.id);
+    else if (l.license?.name) out.push(l.license.name);
+    else if (l.expression) out.push(l.expression);
+  });
+  return out.slice(0, 3);
+}
+
+// ── Vulnerabilities ───────────────────────────────────────────
+function renderVulns(vulns) {
+  const pid = 'cdx-vuln';
+  SS[pid] = { key: 'severity', dir: 1 };
+  SF[pid] = new Set();
+  const panel = document.getElementById(pid);
+
+  panel.innerHTML = `<div class="card">
+  <div class="toolbar">
+    <input class="search" id="s-${pid}" placeholder="Search CVE, component…">
+    <button class="fbtn" data-pid="${pid}" data-sev="CRITICAL" data-cls="fc">Critical</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="HIGH"     data-cls="fh">High</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="MEDIUM"   data-cls="fm">Medium</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="LOW"      data-cls="fl">Low</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="UNKNOWN"  data-cls="fn">Unknown</button>
+    <span class="tcount" id="cnt-${pid}"></span>
+  </div>
+  <div style="overflow-x:auto">
+    <table id="tbl-${pid}">
+      <thead><tr>
+        <th style="width:22px"></th>
+        <th data-key="id">CVE / ID</th>
+        <th data-key="severity">Severity</th>
+        <th data-key="score">Score</th>
+        <th>Method</th>
+        <th>Affected</th>
+        <th>VEX State</th>
+      </tr></thead>
+      <tbody id="tbody-${pid}"></tbody>
+    </table>
+  </div></div>`;
+
+  const render = () => {
+    const SEV_ORD = { critical: 0, high: 1, medium: 2, low: 3, info: 4, none: 5, unknown: 6 };
+    const q  = (document.getElementById('s-' + pid)?.value || '').toLowerCase();
+    const sf = SF[pid];
+    let rows = vulns.filter(v => {
+      const sev = topSev(v).toLowerCase();
+      return (!q || [v.id, v.description, JSON.stringify(v.affects)].join(' ').toLowerCase().includes(q))
+          && (sf.size === 0 || sf.has(sev.toUpperCase()));
+    });
+    const { key, dir } = SS[pid];
+    rows.sort((a, b) => {
+      if (key === 'severity') return ((SEV_ORD[topSev(a).toLowerCase()] ?? 9) - (SEV_ORD[topSev(b).toLowerCase()] ?? 9)) * dir;
+      if (key === 'score')    return (cdxBestScore(b) - cdxBestScore(a)) * dir;
+      return (String(a[key] || '') < String(b[key] || '') ? -1 : 1) * dir;
+    });
+    document.getElementById('cnt-' + pid).textContent = `${rows.length} / ${vulns.length}`;
+    const tbody = document.getElementById('tbody-' + pid);
+    if (!rows.length) { tbody.innerHTML = `<tr><td colspan="7"><div class="empty">No vulnerabilities match.</div></td></tr>`; updateSortTH(pid); return; }
+    tbody.innerHTML = rows.map((v, i) => {
+      const rid   = pid + 'r' + i;
+      const sev   = topSev(v);
+      const score = cdxBestScore(v);
+      const sc    = scoreColor(score);
+      const method = (v.ratings || [])[0]?.method || '—';
+      const affs  = (v.affects || []).map(a => a.ref).filter(Boolean);
+      const state = v.analysis?.state || '';
+      return `<tr onclick="toggleX('${rid}',event)">
+        <td><button class="xbtn" id="xb-${rid}">▸</button></td>
+        <td style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--ac)">${esc(v.id || '—')}</td>
+        <td><span class="sev sev-${sev}">${sev}</span></td>
+        <td>${scoreBarHTML(score, sc)}</td>
+        <td style="font-size:12px;color:var(--tx2)">${esc(method)}</td>
+        <td>${affs.slice(0,3).map(r=>`<span class="affected-chip">${esc(r)}</span>`).join('')}${affs.length>3?`<span class="type-pill">+${affs.length-3}</span>`:''}</td>
+        <td>${state ? `<span class="type-pill" style="background:var(--ac-s);border-color:#b8c8f5;color:var(--ac)">${esc(state.replace(/_/g,' '))}</span>` : '<span style="color:var(--tx3);font-size:12px">—</span>'}</td>
+      </tr>
+      <tr class="xrow" id="x-${rid}"><td class="xcell" colspan="7"><div class="xbody">${vulnDetail(v)}</div></td></tr>`;
+    }).join('');
+    updateSortTH(pid);
+  };
+
+  wirePanel(pid, render);
+  render();
+}
+
+function vulnDetail(v) {
+  const cwes = v.cwes || [];
+  const refs  = (v.references || []).map(r => r.url).filter(Boolean);
+  const an    = v.analysis || {};
+  return xgrid([
+    v.description ? xf('Description', v.description, false, true) : null,
+    v.source?.name ? xfRaw('Source', esc(v.source.name) + (v.source.url ? ` · <a href="${esc(v.source.url)}" target="_blank" style="color:var(--ac)">link</a>` : '')) : null,
+    cwes.length ? xfRaw('CWE(s)', cwes.map(c => `<span class="cwe">CWE-${c}</span>`).join('')) : null,
+    an.justification ? xf('Justification', an.justification) : null,
+    an.detail ? xf('Analysis detail', an.detail, false, true) : null,
+    ...(v.ratings || []).map(r => xfRaw(
+      `Rating · ${r.method || ''}`,
+      `Score: ${r.score ?? '—'} · ${r.severity || '—'}<br><span style="font-family:var(--mono);font-size:10px;color:var(--tx3)">${esc(r.vector || '')}</span>`
+    )),
+    refs.length ? xfRaw('References',
+      `<div class="refs">${refs.slice(0,10).map(r=>`<a href="${esc(r)}" target="_blank">${esc(r)}</a>`).join('')}${refs.length>10?`<span style="color:var(--tx3);font-size:11px">+${refs.length-10} more</span>`:''}</div>`, true) : null,
+  ]);
+}
+
+// ── Dependencies ──────────────────────────────────────────────
+function renderDeps(deps) {
+  const pid = 'cdx-dep';
+  const panel = document.getElementById(pid);
+  panel.innerHTML = `<div class="card">
+  <div class="toolbar">
+    <input class="search" id="s-${pid}" placeholder="Search ref…">
+    <span class="tcount" id="cnt-${pid}"></span>
+  </div>
+  <div id="dep-list"></div></div>`;
+
+  const render = () => {
+    const q = (document.getElementById('s-' + pid)?.value || '').toLowerCase();
+    const rows = deps.filter(d => !q || (d.ref || '').toLowerCase().includes(q));
+    document.getElementById('cnt-' + pid).textContent = `${rows.length} / ${deps.length}`;
+    document.getElementById('dep-list').innerHTML = rows.length
+      ? rows.map(d => {
+          const ds = d.dependsOn || [];
+          return `<div class="dep-row">
+            <span style="font-family:var(--mono);font-size:11px;color:var(--ac);min-width:180px;word-break:break-all">${esc(d.ref || '—')}</span>
+            <span style="color:var(--tx3);white-space:nowrap;padding-top:1px">${ds.length} dep${ds.length !== 1 ? 's' : ''}</span>
+            <div style="display:flex;flex-wrap:wrap;gap:4px">${ds.slice(0,8).map(r=>`<span class="type-pill">${esc(r)}</span>`).join('')}${ds.length>8?`<span class="type-pill">+${ds.length-8}</span>`:''}</div>
+          </div>`;
+        }).join('')
+      : `<div class="empty">No dependencies found.</div>`;
+  };
+
+  document.getElementById('s-' + pid).addEventListener('input', render);
+  render();
+}
+
+// ── Wiring ────────────────────────────────────────────────────
+function wirePanel(pid, cb) {
+  document.getElementById('s-' + pid)?.addEventListener('input', cb);
+  document.querySelectorAll(`.fbtn[data-pid="${pid}"]`).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sev = btn.dataset.sev, cls = btn.dataset.cls;
+      if (SF[pid].has(sev)) { SF[pid].delete(sev); btn.classList.remove(cls); }
+      else                  { SF[pid].add(sev);    btn.classList.add(cls);    }
+      cb();
+    });
+  });
+  wireSortHeaders(pid, cb);
+}
+
+function wireSortHeaders(pid, cb) {
+  document.querySelectorAll(`#tbl-${pid} thead th[data-key]`).forEach(th => {
+    th.addEventListener('click', () => {
+      const ss = SS[pid], key = th.dataset.key;
+      ss.dir = ss.key === key ? -ss.dir : 1;
+      ss.key = key;
+      cb();
+    });
+  });
+}
+
+function switchTab(pid) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.pid === pid));
+  document.querySelectorAll('.tpanel').forEach(p => p.classList.toggle('on', p.id === pid));
+}
+
+function updateSortTH(pid) {
+  const tbl = document.getElementById('tbl-' + pid);
+  if (!tbl) return;
+  const { key, dir } = SS[pid] || {};
+  tbl.querySelectorAll('thead th').forEach(th => {
+    th.classList.remove('sa', 'sd');
+    if (th.dataset.key === key) th.classList.add(dir === 1 ? 'sa' : 'sd');
+  });
+}
+
+function toggleX(rid, e) {
+  if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+  const row = document.getElementById('x-' + rid);
+  const btn = document.getElementById('xb-' + rid);
+  if (!row) return;
+  const open = row.classList.toggle('on');
+  if (btn) btn.textContent = open ? '▾' : '▸';
+}
+
+// ── Shared helpers ────────────────────────────────────────────
+function setMeta(fields) {
+  document.getElementById('meta-grid').innerHTML = fields
+    .map(([k, v, mono]) => `<div class="mc"><div class="mk">${k}</div><div class="mv${mono ? ' mono' : ''}">${esc(String(v))}</div></div>`)
+    .join('');
+}
+
+function setStats(sevList) {
+  const cnt = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, UNKNOWN: 0 };
+  sevList.forEach(s => { const k = s.toUpperCase(); cnt[k] != null ? cnt[k]++ : cnt.UNKNOWN++; });
+  document.getElementById('stats').innerHTML = [
+    { lbl: 'Total',    num: sevList.length, cls: 'st' },
+    { lbl: 'Critical', num: cnt.CRITICAL,   cls: 'sc' },
+    { lbl: 'High',     num: cnt.HIGH,       cls: 'sh' },
+    { lbl: 'Medium',   num: cnt.MEDIUM,     cls: 'sm' },
+    { lbl: 'Low',      num: cnt.LOW,        cls: 'sl' },
+    { lbl: 'Unknown',  num: cnt.UNKNOWN,    cls: 'sn' },
+  ].map(c => `<div class="stat ${c.cls}"><div class="stat-lbl">${c.lbl}</div><div class="stat-num">${c.num}</div></div>`).join('');
+}
+
+function topSev(v) {
+  const order = ['critical','high','medium','low','info','none','unknown'];
+  const sevs = (v.ratings || []).map(r => (r.severity || 'unknown').toLowerCase());
+  for (const s of order) if (sevs.includes(s)) return s.charAt(0).toUpperCase() + s.slice(1);
+  return 'Unknown';
+}
+
+function cdxBestScore(v) {
+  const scores = (v.ratings || []).map(r => Number(r.score) || 0);
+  return scores.length ? Math.max(...scores) : 0;
+}
+
+function scoreColor(s) {
+  return s >= 9 ? 'var(--cc)' : s >= 7 ? 'var(--hc)' : s >= 4 ? 'var(--mc)' : s > 0 ? 'var(--lc)' : 'var(--tx3)';
+}
+
+function scoreBarHTML(score, color) {
+  return `<div class="sb-wrap"><span class="sb-val" style="color:${color}">${score > 0 ? score.toFixed(1) : '—'}</span>${score > 0 ? `<div class="sb-track"><div class="sb-fill" style="width:${score*10}%;background:${color}"></div></div>` : ''}</div>`;
+}
+
+function xgrid(items) { return `<div class="xgrid">${items.filter(Boolean).join('')}</div>`; }
+function xf(label, val, mono, full) { return `<div class="xf${full?' full':''}"><label>${label}</label><div class="val${mono?' mono':''}">${esc(String(val))}</div></div>`; }
+function xfRaw(label, html, full) { return `<div class="xf${full?' full':''}"><label>${label}</label><div class="val">${html}</div></div>`; }
+
+function fmtDT(s)   { try { return new Date(s).toLocaleString(); } catch { return s; } }
+function esc(s) { return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;'); }
+</script>
+</body>
+</html>
