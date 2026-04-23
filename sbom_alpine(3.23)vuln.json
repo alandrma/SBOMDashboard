@@ -1,0 +1,19 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2026-04-23T22:57:59.540357262+07:00",
+  "ArtifactName": "sbom_alpine(3.23).json",
+  "ArtifactType": "cyclonedx",
+  "Metadata": {
+    "OS": {
+      "Family": "alpine",
+      "Name": "3.23.4"
+    }
+  },
+  "Results": [
+    {
+      "Target": "sbom_alpine(3.23).json (alpine 3.23.4)",
+      "Class": "os-pkgs",
+      "Type": "alpine"
+    }
+  ]
+}

