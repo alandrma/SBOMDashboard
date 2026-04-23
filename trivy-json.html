@@ -1,0 +1,501 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Trivy JSON Dashboard</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --bg:    #eceef2;
+  --surf:  #f4f5f7;
+  --surf2: #e8eaef;
+  --surf3: #e0e3ea;
+  --bd:    #d0d4de;
+  --bd2:   #b8bdd0;
+  --tx:    #1e2133;
+  --tx2:   #52596e;
+  --tx3:   #8b92a8;
+  --ac:    #b45309;
+  --ac-s:  #fff3e8;
+
+  --cc:#b91c1c; --cb:#fde8e8; --cbr:#f0a0a0;
+  --hc:#b45309; --hb:#fef3e2; --hbr:#f0c070;
+  --mc:#7c6d00; --mb:#faf6d0; --mbr:#d4c050;
+  --lc:#166534; --lb:#e8f5ee; --lbr:#7ec9a0;
+  --nc:#52596e; --nb:#edeef2; --nbr:#b8bdd0;
+
+  --sans:'Inter',system-ui,sans-serif;
+  --mono:'IBM Plex Mono',monospace;
+  --r:6px; --rl:10px;
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{background:var(--bg);color:var(--tx);font-family:var(--sans);font-size:14px;line-height:1.6;min-height:100vh}
+
+/* Topbar */
+.topbar{background:#e5e0d8;border-bottom:1px solid #d4c8b8;box-shadow:0 1px 3px rgba(0,0,0,.07);padding:0 24px;height:52px;display:flex;align-items:center;gap:10px;position:sticky;top:0;z-index:200}
+.logo{font-weight:700;font-size:15px;letter-spacing:-.3px;display:flex;align-items:center;gap:8px;flex-shrink:0}
+.logo-mark{display:flex;flex-direction:column;gap:2px}
+.logo-mark span{display:block;border-radius:2px}
+.logo-mark span:nth-child(1){width:16px;height:5px;background:var(--hc)}
+.logo-mark span:nth-child(2){width:12px;height:5px;background:var(--cc)}
+.logo-mark span:nth-child(3){width:8px;height:5px;background:var(--mc)}
+.logo em{color:var(--hc);font-style:normal}
+.sep{flex:1;min-width:4px}
+.schema-badge{font-size:10px;padding:3px 9px;border-radius:20px;background:var(--hb);border:1px solid var(--hbr);color:var(--hc);letter-spacing:.4px;white-space:nowrap;flex-shrink:0;font-weight:500}
+#tb-art{font-size:12px;color:var(--tx2);overflow:hidden;text-overflow:ellipsis;white-space:nowrap;max-width:320px}
+.btn{background:var(--hc);color:#fff;border:none;padding:6px 14px;border-radius:var(--r);font-family:var(--sans);font-size:13px;font-weight:500;cursor:pointer;transition:opacity .15s;flex-shrink:0}
+.btn:hover{opacity:.85}
+#fi{display:none}
+
+/* Dropzone */
+#dz{margin:56px auto;max-width:520px;border:2px dashed var(--bd2);border-radius:var(--rl);padding:60px 32px;text-align:center;cursor:pointer;transition:border-color .2s,background .2s;background:var(--surf)}
+#dz:hover,#dz.over{border-color:var(--hc);background:var(--hb)}
+#dz svg{opacity:.35;margin:0 auto 16px;display:block}
+#dz h2{font-weight:600;font-size:17px;margin-bottom:6px}
+#dz p{color:var(--tx2);font-size:13px}
+#dz small{display:block;margin-top:10px;color:var(--tx3);font-size:11px}
+#dz code{background:var(--surf3);border:1px solid var(--bd);border-radius:4px;padding:1px 6px;font-family:var(--mono);font-size:11px;color:var(--tx2)}
+
+/* Main */
+#main{display:none;padding:20px 24px 64px}
+.slabel{font-size:10px;font-weight:600;letter-spacing:1.2px;text-transform:uppercase;color:var(--tx3);margin-bottom:8px;display:flex;align-items:center;gap:8px}
+.slabel::after{content:'';flex:1;height:1px;background:var(--bd)}
+
+/* Meta grid */
+.meta-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(155px,1fr));gap:1px;background:var(--bd);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;margin-bottom:20px;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.mc{background:var(--surf);padding:11px 14px}
+.mk{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);margin-bottom:3px}
+.mv{font-size:13px;color:var(--tx);font-weight:500;word-break:break-all}
+.mv.mono{font-family:var(--mono);font-weight:400;font-size:11px}
+
+/* Stats */
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(110px,1fr));gap:8px;margin-bottom:20px}
+.stat{background:var(--surf);border:1px solid var(--bd);border-radius:var(--rl);padding:12px 14px;position:relative;overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.stat::before{content:'';position:absolute;top:0;left:0;right:0;height:3px}
+.sc::before{background:var(--cc)} .sh::before{background:var(--hc)}
+.sm::before{background:var(--mc)} .sl::before{background:var(--lc)}
+.sn::before{background:var(--bd2)} .st::before{background:var(--hc)}
+.stat-lbl{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);margin-bottom:4px}
+.stat-num{font-size:26px;font-weight:700;line-height:1}
+.sc .stat-num{color:var(--cc)} .sh .stat-num{color:var(--hc)}
+.sm .stat-num{color:var(--mc)} .sl .stat-num{color:var(--lc)}
+.st .stat-num{color:var(--hc)}
+
+/* Tabs */
+.tab-bar{display:flex;border-bottom:1px solid var(--bd);margin-bottom:16px;overflow-x:auto}
+.tab{padding:9px 16px;font-size:12px;font-weight:500;color:var(--tx2);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-1px;white-space:nowrap;transition:color .15s;user-select:none;display:flex;align-items:center;gap:6px}
+.tab:hover{color:var(--tx)}
+.tab.on{color:var(--hc);border-bottom-color:var(--hc)}
+.tbadge{font-size:10px;padding:1px 6px;border-radius:10px;background:var(--surf2);color:var(--tx3)}
+.tab.on .tbadge{background:var(--hb);color:var(--hc)}
+.tpanel{display:none}
+.tpanel.on{display:block}
+.type-pill{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:var(--surf3);border:1px solid var(--bd2);color:var(--tx2)}
+
+/* Card / Table */
+.card{background:var(--surf);border:1px solid var(--bd);border-radius:var(--rl);overflow:hidden;box-shadow:0 1px 3px rgba(0,0,0,.04)}
+.toolbar{padding:10px 12px;border-bottom:1px solid var(--bd);display:flex;gap:8px;align-items:center;flex-wrap:wrap;background:var(--surf2)}
+.search{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:6px 11px;color:var(--tx);font-family:var(--sans);font-size:13px;width:230px;outline:none}
+.search:focus{border-color:var(--hc);box-shadow:0 0 0 2px var(--hb)}
+.search::placeholder{color:var(--tx3)}
+.fbtn{background:var(--surf);border:1px solid var(--bd);border-radius:var(--r);padding:5px 9px;font-family:var(--sans);font-size:11px;font-weight:500;color:var(--tx2);cursor:pointer;transition:all .15s;user-select:none}
+.fbtn:hover{border-color:var(--bd2);color:var(--tx)}
+.fbtn.fc{background:var(--cb);border-color:var(--cbr);color:var(--cc)}
+.fbtn.fh{background:var(--hb);border-color:var(--hbr);color:var(--hc)}
+.fbtn.fm{background:var(--mb);border-color:var(--mbr);color:var(--mc)}
+.fbtn.fl{background:var(--lb);border-color:var(--lbr);color:var(--lc)}
+.fbtn.fn{background:var(--nb);border-color:var(--nbr);color:var(--nc)}
+select.fbtn{appearance:auto;padding:5px 8px}
+.tcount{margin-left:auto;font-size:11px;color:var(--tx3);white-space:nowrap}
+
+table{width:100%;border-collapse:collapse;font-size:13px}
+thead th{background:var(--surf2);padding:8px 12px;text-align:left;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:.8px;color:var(--tx3);border-bottom:1px solid var(--bd);white-space:nowrap;user-select:none}
+thead th[data-key]{cursor:pointer}
+thead th[data-key]:hover{color:var(--tx2)}
+th.sa::after{content:' ↑';color:var(--hc)}
+th.sd::after{content:' ↓';color:var(--hc)}
+tbody tr{border-bottom:1px solid var(--bd);transition:background .1s;cursor:pointer}
+tbody tr:last-child{border-bottom:none}
+tbody tr:hover{background:var(--surf2)}
+td{padding:9px 12px;vertical-align:middle;color:var(--tx)}
+
+/* Expand */
+.xrow{display:none;cursor:default}
+.xrow.on{display:table-row}
+.xrow:hover{background:transparent!important}
+.xcell{padding:0!important}
+.xbody{padding:14px 16px;background:var(--surf2);border-top:1px solid var(--bd)}
+.xgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
+.xf label{font-size:10px;text-transform:uppercase;letter-spacing:.7px;color:var(--tx3);display:block;margin-bottom:3px}
+.xf .val{font-size:13px;color:var(--tx);word-break:break-all}
+.xf .val.mono{font-family:var(--mono);font-size:11px;color:var(--tx2)}
+.full{grid-column:1/-1}
+.xbtn{background:none;border:none;color:var(--tx3);cursor:pointer;font-size:13px;padding:0;transition:color .15s;line-height:1}
+.xbtn:hover{color:var(--hc)}
+
+/* Severity */
+.sev{display:inline-block;padding:2px 9px;border-radius:4px;font-size:11px;font-weight:600;letter-spacing:.4px;text-transform:uppercase;border:1px solid}
+.sev-CRITICAL{background:var(--cb);color:var(--cc);border-color:var(--cbr)}
+.sev-HIGH{background:var(--hb);color:var(--hc);border-color:var(--hbr)}
+.sev-MEDIUM{background:var(--mb);color:var(--mc);border-color:var(--mbr)}
+.sev-LOW{background:var(--lb);color:var(--lc);border-color:var(--lbr)}
+.sev-UNKNOWN,.sev-NONE{background:var(--nb);color:var(--nc);border-color:var(--nbr)}
+
+/* Status */
+.stb{display:inline-block;font-size:10px;padding:2px 7px;border-radius:4px;border:1px solid var(--bd);background:var(--surf3);color:var(--tx2);font-weight:500}
+.stb.affected{background:#fff0f0;border-color:#f5b8b8;color:#b91c1c}
+.stb.fixed{background:#edfbf0;border-color:#7ec9a0;color:#166534}
+.stb.will_not_fix{background:#fef9e7;border-color:#f0d060;color:#7c6000}
+
+/* Score bar */
+.sb-wrap{display:flex;align-items:center;gap:6px}
+.sb-val{font-weight:600;font-size:13px;min-width:30px}
+.sb-track{flex:1;height:4px;background:var(--surf3);border-radius:2px;overflow:hidden;min-width:44px}
+.sb-fill{height:100%;border-radius:2px}
+
+/* Misc */
+.cwe{display:inline-block;font-size:10px;padding:1px 6px;border-radius:4px;background:var(--hb);border:1px solid var(--hbr);color:var(--hc);margin:1px 2px 1px 0;font-family:var(--mono)}
+.vendor-wrap{display:flex;flex-wrap:wrap;gap:5px;margin-top:3px}
+.vscore{font-size:11px;padding:2px 7px;border-radius:4px;background:var(--surf3);border:1px solid var(--bd);color:var(--tx2)}
+.refs a{display:block;font-size:11px;color:var(--hc);text-decoration:none;word-break:break-all;margin-bottom:2px}
+.refs a:hover{text-decoration:underline}
+.cvss-block{display:flex;flex-direction:column;gap:4px;margin-top:3px}
+.cvss-row{display:flex;align-items:baseline;gap:8px;font-size:12px}
+.cvss-src{font-weight:600;color:var(--tx2);min-width:38px}
+.cvss-vec{font-family:var(--mono);font-size:10px;color:var(--tx3);word-break:break-all}
+.pkg-name{font-weight:500}
+.pkg-ver{font-size:11px;color:var(--tx2);font-family:var(--mono)}
+.empty{padding:40px;text-align:center;color:var(--tx3);font-size:13px}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bd2);border-radius:3px}
+@media(max-width:700px){#main{padding:12px}.search{width:150px}}
+</style>
+</head>
+<body>
+
+<div class="topbar">
+  <div class="logo">
+    <div class="logo-mark"><span></span><span></span><span></span></div>
+    Trivy<em>scan</em>
+  </div>
+  <span class="schema-badge">Trivy JSON · Schema v2</span>
+  <div class="sep"></div>
+  <span id="tb-art"></span>
+  <button class="btn" onclick="document.getElementById('fi').click()">Load JSON</button>
+  <input type="file" id="fi" accept=".json">
+</div>
+
+<div id="dz">
+  <svg width="44" height="44" viewBox="0 0 44 44" fill="none">
+    <rect x="3" y="3" width="38" height="38" rx="5" stroke="#b45309" stroke-width="1.8" stroke-dasharray="5 3"/>
+    <path d="M22 13v18M13 23l9-9 9 9" stroke="#b45309" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+  </svg>
+  <h2>Drop Trivy JSON report here</h2>
+  <p>Format: <code>SchemaVersion: 2</code> · native Trivy output</p>
+  <p style="margin-top:8px;font-size:12px;color:var(--tx3)">Generate with: <code>trivy image --format json -o report.json &lt;image&gt;</code></p>
+  <small>All processing is done locally — no data is transmitted</small>
+</div>
+
+<div id="main">
+  <div class="slabel">scan info</div>
+  <div class="meta-grid" id="meta-grid"></div>
+  <div class="slabel">vulnerability summary</div>
+  <div class="stats" id="stats"></div>
+  <div class="slabel">results by target</div>
+  <div class="tab-bar" id="tab-bar"></div>
+  <div id="panels"></div>
+</div>
+
+<script>
+let SS = {}, SF = {};
+
+// ── File load ─────────────────────────────────────────────────
+const dz = document.getElementById('dz');
+const fi = document.getElementById('fi');
+dz.addEventListener('click', () => fi.click());
+dz.addEventListener('dragover', e => { e.preventDefault(); dz.classList.add('over'); });
+dz.addEventListener('dragleave', () => dz.classList.remove('over'));
+dz.addEventListener('drop', e => { e.preventDefault(); dz.classList.remove('over'); if (e.dataTransfer.files[0]) load(e.dataTransfer.files[0]); });
+fi.addEventListener('change', e => { if (e.target.files[0]) load(e.target.files[0]); e.target.value = ''; });
+
+function load(file) {
+  const r = new FileReader();
+  r.onload = e => {
+    try {
+      const d = JSON.parse(e.target.result);
+      if (!Array.isArray(d.Results)) { alert('This does not look like a Trivy JSON report (missing Results[]).\n\nFor CycloneDX format, use trivy-cdx.html instead.'); return; }
+      init(d);
+    } catch (err) { alert('Invalid JSON:\n' + err.message); }
+  };
+  r.readAsText(file);
+}
+
+// ── Init ──────────────────────────────────────────────────────
+function init(d) {
+  dz.style.display = 'none';
+  document.getElementById('main').style.display = 'block';
+
+  const os   = d.Metadata?.OS;
+  const allV = (d.Results || []).flatMap(r => r.Vulnerabilities || []);
+  document.getElementById('tb-art').textContent = d.ArtifactName || '';
+
+  setMeta([
+    ['Artifact',    d.ArtifactName || '—'],
+    ['Type',        d.ArtifactType || '—'],
+    ['Scanned at',  d.CreatedAt ? fmtDT(d.CreatedAt) : '—'],
+    ['OS',          os ? os.Family + ' ' + os.Name : '—'],
+    ['Targets',     (d.Results || []).length + ' target(s)'],
+    ['Total vulns', allV.length + ' found'],
+  ]);
+  setStats(allV.map(v => v.Severity || 'UNKNOWN'));
+
+  const bar    = document.getElementById('tab-bar');
+  const panels = document.getElementById('panels');
+  bar.innerHTML = ''; panels.innerHTML = '';
+  const results = d.Results || [];
+  if (!results.length) { bar.innerHTML = '<div style="padding:12px;color:var(--tx3);font-size:13px">No results in this report.</div>'; return; }
+
+  results.forEach((res, i) => {
+    const pid   = 'p' + i;
+    SS[pid] = { key: 'Severity', dir: 1 };
+    SF[pid] = new Set();
+    const vulns = res.Vulnerabilities || [];
+
+    const tab = document.createElement('div');
+    tab.className = 'tab' + (i === 0 ? ' on' : '');
+    tab.dataset.pid = pid;
+    tab.title = res.Target || '';
+    tab.innerHTML = `<span>${esc(shortStr(res.Target || '—', 46))}</span>`
+      + `<span class="type-pill">${esc(res.Type || res.Class || '—')}</span>`
+      + `<span class="tbadge">${vulns.length}</span>`;
+    tab.addEventListener('click', () => switchTab(pid));
+    bar.appendChild(tab);
+
+    const panel = document.createElement('div');
+    panel.id = pid;
+    panel.className = 'tpanel' + (i === 0 ? ' on' : '');
+    panel.innerHTML = panelHTML(pid);
+    panels.appendChild(panel);
+
+    wirePanel(pid, () => renderTable(res, pid));
+    renderTable(res, pid);
+  });
+}
+
+// ── Panel HTML ────────────────────────────────────────────────
+function panelHTML(pid) {
+  return `<div class="card">
+  <div class="toolbar">
+    <input class="search" id="s-${pid}" placeholder="Search CVE, package, title…">
+    <button class="fbtn" data-pid="${pid}" data-sev="CRITICAL" data-cls="fc">Critical</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="HIGH"     data-cls="fh">High</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="MEDIUM"   data-cls="fm">Medium</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="LOW"      data-cls="fl">Low</button>
+    <button class="fbtn" data-pid="${pid}" data-sev="UNKNOWN"  data-cls="fn">Unknown</button>
+    <span class="tcount" id="cnt-${pid}"></span>
+  </div>
+  <div style="overflow-x:auto">
+    <table id="tbl-${pid}">
+      <thead><tr>
+        <th style="width:22px"></th>
+        <th data-key="VulnerabilityID">CVE / ID</th>
+        <th data-key="Severity">Severity</th>
+        <th data-key="PkgName">Package</th>
+        <th data-key="InstalledVersion">Installed</th>
+        <th data-key="FixedVersion">Fixed in</th>
+        <th>Score</th>
+        <th data-key="Status">Status</th>
+        <th>Title</th>
+      </tr></thead>
+      <tbody id="tbody-${pid}"></tbody>
+    </table>
+  </div></div>`;
+}
+
+// ── Render table ──────────────────────────────────────────────
+function renderTable(res, pid) {
+  const SEV_ORD = { CRITICAL: 0, HIGH: 1, MEDIUM: 2, LOW: 3, UNKNOWN: 4 };
+  const q  = (document.getElementById('s-' + pid)?.value || '').toLowerCase();
+  const sf = SF[pid];
+  const vulns = res.Vulnerabilities || [];
+
+  let rows = vulns.filter(v => {
+    const matchQ = !q || [v.VulnerabilityID, v.PkgName, v.PkgID, v.Title, v.Description].join(' ').toLowerCase().includes(q);
+    return matchQ && (sf.size === 0 || sf.has(v.Severity || 'UNKNOWN'));
+  });
+
+  const { key, dir } = SS[pid];
+  rows.sort((a, b) => {
+    if (key === 'Severity') return ((SEV_ORD[a.Severity] ?? 9) - (SEV_ORD[b.Severity] ?? 9)) * dir;
+    return (String(a[key] || '').toLowerCase() < String(b[key] || '').toLowerCase() ? -1 : 1) * dir;
+  });
+
+  document.getElementById('cnt-' + pid).textContent = `${rows.length} / ${vulns.length}`;
+  const tbody = document.getElementById('tbody-' + pid);
+
+  if (!rows.length) {
+    tbody.innerHTML = `<tr><td colspan="9"><div class="empty">No vulnerabilities match your filter.</div></td></tr>`;
+    updateSortTH(pid); return;
+  }
+
+  tbody.innerHTML = rows.map((v, i) => {
+    const rid    = pid + 'r' + i;
+    const sev    = v.Severity || 'UNKNOWN';
+    const score  = bestScore(v);
+    const sc     = scoreColor(score);
+    const status = (v.Status || '').toLowerCase().replace(/ /g, '_');
+    return `<tr onclick="toggleX('${rid}',event)">
+      <td><button class="xbtn" id="xb-${rid}">▸</button></td>
+      <td style="font-family:var(--mono);font-size:12px;font-weight:500;color:var(--hc)">${esc(v.VulnerabilityID || '—')}</td>
+      <td><span class="sev sev-${sev}">${sev}</span></td>
+      <td>
+        <div class="pkg-name">${esc(v.PkgName || '—')}</div>
+        ${v.PkgID && v.PkgID !== v.PkgName ? `<div class="pkg-ver">${esc(v.PkgID)}</div>` : ''}
+      </td>
+      <td style="font-family:var(--mono);font-size:12px">${esc(v.InstalledVersion || '—')}</td>
+      <td style="font-family:var(--mono);font-size:12px;color:var(--lc)">${v.FixedVersion ? esc(v.FixedVersion) : '<span style="color:var(--tx3)">—</span>'}</td>
+      <td>${scoreBarHTML(score, sc)}</td>
+      <td><span class="stb ${status}">${esc(v.Status || '—')}</span></td>
+      <td style="font-size:12px;color:var(--tx2);max-width:220px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap" title="${esc(v.Title || '')}">${esc(v.Title || '—')}</td>
+    </tr>
+    <tr class="xrow" id="x-${rid}"><td class="xcell" colspan="9"><div class="xbody">${detailHTML(v)}</div></td></tr>`;
+  }).join('');
+
+  updateSortTH(pid);
+}
+
+function detailHTML(v) {
+  const purl  = v.PkgIdentifier?.PURL || '';
+  const uid   = v.PkgIdentifier?.UID  || '';
+  const cvss  = v.CVSS || {};
+  const cwes  = v.CweIDs || [];
+  const refs  = v.References || [];
+  const vs    = v.VendorSeverity || {};
+  const src   = v.DataSource;
+  const layer = v.Layer?.DiffID || '';
+
+  const cvssHTML = Object.entries(cvss).map(([s, c]) =>
+    `<div class="cvss-row"><span class="cvss-src">${esc(s)}</span>`
+    + `<span>${c.V3Score != null ? `V3 <b>${c.V3Score}</b>` : ''}${c.V2Score != null ? ` · V2 <b>${c.V2Score}</b>` : ''}</span></div>`
+    + (c.V3Vector ? `<div class="cvss-vec">${esc(c.V3Vector)}</div>` : '')
+    + (c.V2Vector ? `<div class="cvss-vec">${esc(c.V2Vector)}</div>` : '')
+  ).join('');
+
+  return xgrid([
+    v.Description ? xf('Description', v.Description, false, true) : null,
+    purl  ? xf('PURL', purl, true, true) : null,
+    xf('Published',     v.PublishedDate    ? fmtDate(v.PublishedDate)    : '—'),
+    xf('Last modified', v.LastModifiedDate ? fmtDate(v.LastModifiedDate) : '—'),
+    v.SeveritySource ? xf('Severity source', v.SeveritySource) : null,
+    uid   ? xf('UID', uid, true) : null,
+    layer ? xf('Layer DiffID', layer, true, true) : null,
+    cwes.length ? xfRaw('CWE(s)', cwes.map(c => `<span class="cwe">${esc(c)}</span>`).join('')) : null,
+    Object.keys(vs).length ? xfRaw('Vendor severity',
+      `<div class="vendor-wrap">${Object.entries(vs).map(([k, val]) => `<span class="vscore">${esc(k)}: ${val}</span>`).join('')}</div>`) : null,
+    cvssHTML ? xfRaw('CVSS', `<div class="cvss-block">${cvssHTML}</div>`, true) : null,
+    src ? xfRaw('Data source',
+      esc(src.Name || src.ID || '—') + (src.URL ? ` · <a href="${esc(src.URL)}" target="_blank" style="color:var(--hc)">link</a>` : '')) : null,
+    v.PrimaryURL ? xfRaw('Primary URL',
+      `<a href="${esc(v.PrimaryURL)}" target="_blank" style="color:var(--hc);font-size:12px">${esc(v.PrimaryURL)}</a>`) : null,
+    refs.length ? xfRaw('References',
+      `<div class="refs">${refs.slice(0, 12).map(r => `<a href="${esc(r)}" target="_blank">${esc(r)}</a>`).join('')}${refs.length > 12 ? `<span style="color:var(--tx3);font-size:11px">+${refs.length - 12} more</span>` : ''}</div>`, true) : null,
+  ]);
+}
+
+// ── Wiring ────────────────────────────────────────────────────
+function wirePanel(pid, cb) {
+  document.getElementById('s-' + pid)?.addEventListener('input', cb);
+  document.querySelectorAll(`.fbtn[data-pid="${pid}"]`).forEach(btn => {
+    btn.addEventListener('click', () => {
+      const sev = btn.dataset.sev, cls = btn.dataset.cls;
+      if (SF[pid].has(sev)) { SF[pid].delete(sev); btn.classList.remove(cls); }
+      else                  { SF[pid].add(sev);    btn.classList.add(cls);    }
+      cb();
+    });
+  });
+  document.querySelectorAll(`#tbl-${pid} thead th[data-key]`).forEach(th => {
+    th.addEventListener('click', () => {
+      const ss = SS[pid], key = th.dataset.key;
+      ss.dir = ss.key === key ? -ss.dir : 1;
+      ss.key = key;
+      cb();
+    });
+  });
+}
+
+function switchTab(pid) {
+  document.querySelectorAll('.tab').forEach(t => t.classList.toggle('on', t.dataset.pid === pid));
+  document.querySelectorAll('.tpanel').forEach(p => p.classList.toggle('on', p.id === pid));
+}
+
+function updateSortTH(pid) {
+  const tbl = document.getElementById('tbl-' + pid);
+  if (!tbl) return;
+  const { key, dir } = SS[pid] || {};
+  tbl.querySelectorAll('thead th').forEach(th => {
+    th.classList.remove('sa', 'sd');
+    if (th.dataset.key === key) th.classList.add(dir === 1 ? 'sa' : 'sd');
+  });
+}
+
+function toggleX(rid, e) {
+  if (e.target.tagName === 'A' || e.target.tagName === 'BUTTON') return;
+  const row = document.getElementById('x-' + rid);
+  const btn = document.getElementById('xb-' + rid);
+  if (!row) return;
+  const open = row.classList.toggle('on');
+  if (btn) btn.textContent = open ? '▾' : '▸';
+}
+
+// ── Shared helpers ────────────────────────────────────────────
+function setMeta(fields) {
+  document.getElementById('meta-grid').innerHTML = fields
+    .map(([k, v, mono]) => `<div class="mc"><div class="mk">${k}</div><div class="mv${mono ? ' mono' : ''}">${esc(String(v))}</div></div>`)
+    .join('');
+}
+
+function setStats(sevList) {
+  const cnt = { CRITICAL: 0, HIGH: 0, MEDIUM: 0, LOW: 0, UNKNOWN: 0 };
+  sevList.forEach(s => { const k = s.toUpperCase(); cnt[k] != null ? cnt[k]++ : cnt.UNKNOWN++; });
+  document.getElementById('stats').innerHTML = [
+    { lbl: 'Total',    num: sevList.length, cls: 'st' },
+    { lbl: 'Critical', num: cnt.CRITICAL,   cls: 'sc' },
+    { lbl: 'High',     num: cnt.HIGH,       cls: 'sh' },
+    { lbl: 'Medium',   num: cnt.MEDIUM,     cls: 'sm' },
+    { lbl: 'Low',      num: cnt.LOW,        cls: 'sl' },
+    { lbl: 'Unknown',  num: cnt.UNKNOWN,    cls: 'sn' },
+  ].map(c => `<div class="stat ${c.cls}"><div class="stat-lbl">${c.lbl}</div><div class="stat-num">${c.num}</div></div>`).join('');
+}
+
+function bestScore(v) {
+  let best = 0;
+  Object.values(v.CVSS || {}).forEach(c => {
+    if ((c.V3Score || 0) > best) best = c.V3Score;
+    if ((c.V2Score || 0) > best) best = c.V2Score;
+  });
+  return best;
+}
+
+function scoreColor(s) {
+  return s >= 9 ? 'var(--cc)' : s >= 7 ? 'var(--hc)' : s >= 4 ? 'var(--mc)' : s > 0 ? 'var(--lc)' : 'var(--tx3)';
+}
+
+function scoreBarHTML(score, color) {
+  return `<div class="sb-wrap"><span class="sb-val" style="color:${color}">${score > 0 ? score.toFixed(1) : '—'}</span>${score > 0 ? `<div class="sb-track"><div class="sb-fill" style="width:${score * 10}%;background:${color}"></div></div>` : ''}</div>`;
+}
+
+function xgrid(items) { return `<div class="xgrid">${items.filter(Boolean).join('')}</div>`; }
+function xf(label, val, mono, full) { return `<div class="xf${full ? ' full' : ''}"><label>${label}</label><div class="val${mono ? ' mono' : ''}">${esc(String(val))}</div></div>`; }
+function xfRaw(label, html, full) { return `<div class="xf${full ? ' full' : ''}"><label>${label}</label><div class="val">${html}</div></div>`; }
+
+function shortStr(s, n) { return s.length > n ? '…' + s.slice(-(n - 1)) : s; }
+function fmtDT(s)   { try { return new Date(s).toLocaleString(); } catch { return s; } }
+function fmtDate(s) { try { return new Date(s).toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }); } catch { return s; } }
+function esc(s) { return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;'); }
+</script>
+</body>
+</html>
